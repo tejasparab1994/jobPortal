@@ -4,11 +4,13 @@
 <%= for job <- jobs["authenticJobs"] do %>
 <% IO.inspect(job) %>
 <li>
-<table>
+<table class="table">
 <tr>
 <td>
  <strong> <%= job |> Map.get("title") %></strong> </td></tr>
- <tr><td><%= job |> Map.get("company") |> Map.get("name") %></td></tr> <td>
+ <tr><td>
+ <%= tag(:img, src: String.replace(job |> Map.get("company") |> Map.get("logo"), "https://d2fcz5no062gar.cloudfront.nethttps://", "https://"), width: 50, height: 50) %>
+ <%= job |> Map.get("company") |> Map.get("name") %></td></tr> <td>
   
  </td></tr></table></li>
 <% end %>
@@ -22,15 +24,17 @@
 <%= for job <- jobs["github"] do %>
 <% IO.inspect(job) %>
 <li>
-<table>
+<table class="table">
 <tr>
 <td>
  <strong> <%= job |> Map.get("title") %></strong> </td></tr>
- <tr><td><%= job |> Map.get("company") %></td></tr> <td>
+ <tr>
+ <td>
+ <%=  tag(:img, src: (job |> Map.get("company_logo")), width: 50, height: 50) %>
+ <%= job |> Map.get("company") %></td></tr> <td>
   
  </td></tr></table></li>
 <% end %>
 </ul>
 
-<button id="api" onclick ="buttonPress()"> Get Jobs</button>
       
