@@ -1,0 +1,23 @@
+<div id ="title">Some Name</div>
+<div id="form-Area">
+<form id="searchForm" method="post" action = "<%= page_path(@conn, :jobList) %>">
+<table>
+<tr>
+<td>
+<div class="form-group">
+<label for =  "title" class="label-keywords"> What </label> <br />
+<input type="text" name="title" placeholder = "title" />
+</div>
+</td> 
+<td>
+<div class="form-group">
+<label for =  "location" class="label-keywords"> Where </label><br />
+<input type="text" name="location" placeholder = "city,state or zip code" />
+</div>
+</td> 
+</tr>
+</table>
+<input type="hidden" name="_csrf_token" value="<%= Plug.CSRFProtection.get_csrf_token() %>">
+<input type="submit" name ="submit" value = "search" />
+</form>
+</div>

@@ -1,0 +1,36 @@
+
+<ul> 
+<% jobs = JobPortalWeb.PageController.getJobData(@conn.body_params["title"], @conn.body_params["location"] ) %>
+<%= for job <- jobs["authenticJobs"] do %>
+<% IO.inspect(job) %>
+<li>
+<table>
+<tr>
+<td>
+ <strong> <%= job |> Map.get("title") %></strong> </td></tr>
+ <tr><td><%= job |> Map.get("company") |> Map.get("name") %></td></tr> <td>
+  
+ </td></tr></table></li>
+<% end %>
+
+<!-- Github API -->
+
+</ul>
+<p><%= @conn.body_params["title"] %> </p>
+<h3> jobs from github are </h3>
+<ul>
+<%= for job <- jobs["github"] do %>
+<% IO.inspect(job) %>
+<li>
+<table>
+<tr>
+<td>
+ <strong> <%= job |> Map.get("title") %></strong> </td></tr>
+ <tr><td><%= job |> Map.get("company") %></td></tr> <td>
+  
+ </td></tr></table></li>
+<% end %>
+</ul>
+
+<button id="api" onclick ="buttonPress()"> Get Jobs</button>
+      
