@@ -19,3 +19,11 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+import home_init from "./home";
+
+function start(){
+  let root = document.getElementById('root');
+
+  home_init(root);
+}
+$(start)

@@ -15,8 +15,10 @@ defmodule JobPortalWeb.Router do
 
   scope "/", JobPortalWeb do
     pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
+    post "/fileparse", PageController, :uploadfile
+    get "/fileparse", PageController, :uploadfile
+    get "/index", PageController, :index
+    get "/", PageController, :home
     post "/jobList", PageController, :jobList
   end
 
