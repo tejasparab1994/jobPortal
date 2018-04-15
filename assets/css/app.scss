@@ -7,12 +7,13 @@
 }
 
 .search-padding {
-  background-color: #caccce;
+  background-color: #ffffff;
 }
 
 .search-input {
   top: 25%;
   padding: 10%;
+  text-align: center;
 }
 
 .navbar-blue {
@@ -21,4 +22,18 @@
 
 .filters-box {
   background-color: #313335;
+}
+
+.form-components {
+  display: flex;
+  justify-content: center;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
