@@ -1,5 +1,24 @@
 /* This file is for your main application css. */
 @import "bootstrap";
+//@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
 .label-keywords {
     font-size: 24px;
+}
+
+.search-padding {
+  background-color: #caccce;
+}
+
+.search-input {
+  top: 25%;
+  padding: 10%;
+}
+
+.navbar-blue {
+  background-color: #0077b5;
+}
+
+.filters-box {
+  background-color: #313335;
 }
