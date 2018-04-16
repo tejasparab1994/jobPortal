@@ -12,6 +12,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import Link from 'react-router-dom';
 
 export default class Navbar extends React.Component {
   render() {
@@ -45,7 +46,8 @@ afterLogin() {
       targetOrigin={{horizontal: 'right', vertical: 'top'}}
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
-      <MenuItem primaryText="Tools" />
+      <MenuItem primaryText="Home" href="/" />
+      <MenuItem primaryText="Tools" href="/tools" />
       <MenuItem primaryText="Profile" />
       <MenuItem primaryText="Log out" />
     </IconMenu>
