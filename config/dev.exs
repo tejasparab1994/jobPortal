@@ -57,8 +57,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :jobPortal, JobPortal.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "portal",
+  password: "someRandomNumber123",
   database: "jobportal_dev",
   hostname: "localhost",
   pool_size: 10

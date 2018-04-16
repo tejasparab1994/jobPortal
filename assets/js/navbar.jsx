@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {NavItem, NavLink} from 'reactstrap'
+import {NavItem} from 'reactstrap'
 import UserOptions from './user-options'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Mui from './mui';
@@ -12,7 +12,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import Link from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 export default class Navbar extends React.Component {
   render() {
@@ -46,9 +46,9 @@ afterLogin() {
       targetOrigin={{horizontal: 'right', vertical: 'top'}}
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
-      <MenuItem primaryText="Home" href="/" />
-      <MenuItem primaryText="Tools" href="/tools" />
-      <MenuItem primaryText="Profile" href="/profile"/>
+      <NavLink to="/"><MenuItem primaryText="Home" /></NavLink>
+      <NavLink to="/tools"><MenuItem primaryText="Tools" /></NavLink>
+      <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
       <MenuItem primaryText="Log out" />
     </IconMenu>
   )
