@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.1.0",
+    "deep-freeze": "0.0.1",
     "jquery": "^3.3.1",
     "material-ui": "^0.20.0",
     "phoenix": "file:../deps/phoenix",
@@ -14,7 +15,9 @@
     "popper.js": "^1.14.3",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
     "reactstrap": "^5.0.0",
+    "redux": "^3.7.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

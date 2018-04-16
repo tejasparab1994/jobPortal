@@ -2,7 +2,7 @@ defmodule JobPortalWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", JobPortalWeb.RoomChannel
+  channel "users:online", JobPortalWeb.UserChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

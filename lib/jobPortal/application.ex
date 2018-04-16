@@ -14,6 +14,7 @@ defmodule JobPortal.Application do
       supervisor(JobPortalWeb.Endpoint, []),
       # Start your own worker by calling: JobPortal.Worker.start_link(arg1, arg2, arg3)
       # worker(JobPortal.Worker, [arg1, arg2, arg3]),
+      # worker(JobPortalWeb.ApiServer, [%{}]),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
