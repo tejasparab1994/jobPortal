@@ -48,7 +48,7 @@ afterLogin() {
     >
       <MenuItem primaryText="Home" href="/" />
       <MenuItem primaryText="Tools" href="/tools" />
-      <MenuItem primaryText="Profile" />
+      <MenuItem primaryText="Profile" href="/profile"/>
       <MenuItem primaryText="Log out" />
     </IconMenu>
   )

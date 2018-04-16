@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Navbar from './navbar';
 import Search from './search'
 import Results from './results'
+import Profile from './profile'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Mui from './mui';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -26,11 +27,12 @@ class Jobs extends React.Component {
   render() {
     return(
       <Router>
-      <div>
-        <MuiThemeProvider muiTheme={Mui}>
-          <Navbar channel={this.props.channel}/>
-          <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
-          <Route path="/tools" render={() => <Scorer />} />
+        <div>
+          <MuiThemeProvider muiTheme={Mui}>
+            <Navbar channel={this.props.channel}/>
+            <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
+            <Route path="/tools" render={() => <Scorer />} />
+            <Route path="/profile" render={() => <Profile />} />
         </MuiThemeProvider>
       </div>
     </Router>
