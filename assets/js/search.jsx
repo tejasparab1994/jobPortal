@@ -4,7 +4,7 @@ import {InputGroup, Button, Input} from 'reactstrap'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
-
+import ActionSearch from 'material-ui/svg-icons/action/search';
 
 class Search extends React.Component {
   constructor(props){
@@ -48,14 +48,18 @@ class Search extends React.Component {
           name="title"
           floatingLabelText="Job"
           onChange={(ev)=>this.update(ev)}
-          />
+        />
         <TextField
           name="location"
           floatingLabelText="Location"
           onChange={(ev)=>this.update(ev)}
-          />
+        />
 
-        <RaisedButton label="Search" onClick={(ev)=>this.submit(ev)} primary={true}/>
+        <RaisedButton
+          label="Search"
+          onClick={(ev)=>this.submit(ev)}
+          primary={true}
+          icon={<ActionSearch />}/>
       </div>
     )
   }
