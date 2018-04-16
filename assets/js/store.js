@@ -26,7 +26,20 @@ function jobs(state = [], action) {
   }
 }
 
-
+let empty_resume = {
+  file: null,
+  name: "",
+}
+function resume(state=empty_resume, action) {
+  switch (action.type) {
+    case 'UPDATE_RESUME':
+    return Object.assign({}, state, action.data);
+    case 'CLEAR_RESUME':
+    return Object.assign({}, state, empty_resume);
+    default:
+    return state;
+  }
+}
 
 let empty_searchParams = {
   title: "",
@@ -45,7 +58,7 @@ function searchParams(state = empty_searchParams, action) {
 }
 
 function root_reducer(state0, action) {
-  let reducer = combineReducers({jobs, searchParams});
+  let reducer = combineReducers({jobs, searchParams, resume});
   let state1 = reducer(state0, action);
   console.log("ReduxState", state1);
   return deepFreeze(state1);

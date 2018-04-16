@@ -1,58 +1,55 @@
-
 import React from 'react'
-// import axios, { post } from 'axios';
+import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 
-export default class ResumeParser extends React.Component {
+class ResumeParser extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state ={
-      file:null
+  clear(ev) {
+    $("#fileform").val('');
+    this.props.dispatch({type: 'CLEAR_RESUME'});
+  }
+
+  update(ev){
+    let tgt = $(ev.target);
+    let value = ev.target.files[0];
+    let data = {};
+    data[tgt.attr('name')] = value;
+    data["name"] = value.name;
+    let action = {
+      type: 'UPDATE_RESUME',
+      data: data,
+    };
+    this.props.dispatch(action);
+  }
+
+
+  onFormSubmit(ev){
+    ev.preventDefault() // Stop form submit
+    if (this.props.resume.file != null) {
+
+      let reader = new FileReader()
+      let filename = this.props.resume.file != null ? this.props.resume.name : "";
+      reader.readAsDataURL(this.props.resume.file)
+      reader.addEventListener("load", ()=> {
+        let payload = {binary: reader.result.split(",", 2)[1], filename: filename}
+        console.log(payload);
+        this.props.channel.push("uploadfile", payload)
+      }, false);
     }
-    this.onFormSubmit = this.onFormSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
-    this.fileUpload = this.fileUpload.bind(this)
-  }
-  onFormSubmit(e){
-    e.preventDefault() // Stop form submit
-    console.log(this.state.file);
-    let formData = new FormData();
-    let reader = new FileReader()
-    let file = this.state.file.name;
-    reader.readAsDataURL(this.state.file)
-    reader.addEventListener("load", ()=> {
-      console.log(file);
-      // console.log(reader.result.split(",", 2)[1]);
-      let payload = {binary: reader.result.split(",", 2)[1], filename: file}
-      console.log(payload);
-      this.props.channel.push("uploadfile", payload)
-  }, false);
 
-  }
-
-  onChange(e) {
-    this.setState({file:e.target.files[0]})
-
-  }
-  fileUpload(file){
-    const url = 'http://example.com/file-upload';
-    const formData = new FormData();
-    formData.append('file',file)
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    }
-    return  "post(url, formData,config)"
   }
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form onSubmit={(ev)=>this.onFormSubmit(ev)}>
         <h1>File Upload</h1>
-        <input type="file" onChange={this.onChange} />
+        <input id="fileform" type="file" name="file" onChange={(ev)=>this.update(ev)} />
         <button type="submit">Upload</button>
+        <button name="clear" onClick={(ev)=>this.clear(ev)}>Clear</button>
+
       </form>
-   )
+    )
   }
 }
+
+export default connect((state) => state)(ResumeParser);
