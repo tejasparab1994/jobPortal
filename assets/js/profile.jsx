@@ -13,7 +13,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <ResumeParser />
+        <ResumeParser channel={this.props.channel} />
         <Tabs>
           <Tab label ="Applied Jobs">
             <Organizer />

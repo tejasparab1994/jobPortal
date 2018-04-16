@@ -32,7 +32,7 @@ class Jobs extends React.Component {
             <Navbar channel={this.props.channel}/>
             <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
             <Route path="/tools" render={() => <Scorer />} />
-            <Route path="/profile" render={() => <Profile />} />
+            <Route path="/profile" render={() => <Profile channel={this.props.channel} />} />
         </MuiThemeProvider>
       </div>
     </Router>
