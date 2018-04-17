@@ -1,10 +1,42 @@
 import React from 'react';
-import { Button, FormGroup, Label, Input } from 'reactstrap';
+import { Button, FormGroup, Label, Input, Form } from 'reactstrap';
 import { connect } from 'react-redux';
 import api from './api'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+
+let LoginForm = connect(({login}) => {return {login};})((props) => {
+    function update(ev) {
+      let tgt = $(ev.target);
+      let data = {};
+      data[tgt.attr('name')] = tgt.val();
+      props.dispatch({
+        type: 'UPDATE_LOGIN_FORM',
+        data: data,
+      });
+    }
+  
+    function create_token(ev) {
+      api.submit_login(props.login, props.history );
+      console.log(props.login);
+    }
+    
+    return <div>
+    <Form inline>
+      <FormGroup>
+      <TextField hintText="Name" floatingLabelText="Name" name="name" 
+               value={props.login.name} onChange={update} />
+      </FormGroup>
+      <FormGroup>
+      <TextField hintText="Password" floatingLabelText="Password" name="pass" 
+               value={props.login.pass} type="password" onChange={update} />
+      </FormGroup>
+      <RaisedButton label="Log In" primary={true} onClick = {create_token} />
+    </Form>
+  </div>;
+  });
+
 function UserForm(params) {
   function update(ev) {
     let tgt = $(ev.target);
@@ -49,6 +81,8 @@ function UserForm(params) {
   }
     return (
     <div class="col s12" align="center" style={{padding: "10ex", width: "50%"}}>
+     <div class="row">
+     <div class="col-sm-6">
      <h3 style={{color: "violet"}} > Register Here</h3>
     <Paper zDepth={2}>
    
@@ -62,8 +96,14 @@ function UserForm(params) {
       <TextField hintText="Password Field" floatingLabelText="Password" type="password" name="password" value={params.userForm.password} onChange={update} />
       </FormGroup>
       <input type="hidden" name = "login_type" value="formRegister" />
+
       <RaisedButton label="Add User" secondary={true} onClick = {submit} />
       </Paper>
+      </div>
+      <div class="col-sm-6">
+      <LoginForm history = {params.history} />
+      </div>
+      </div>
 </div> )
   }
 

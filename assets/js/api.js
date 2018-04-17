@@ -58,7 +58,7 @@ $.ajax("/api/v1/githubToken", {
     });
   }
 
-  submit_login(data) {
+  submit_login(data, history) {
     $.ajax("/api/v1/token", {
       method: "post",
       dataType: "json",
@@ -70,6 +70,10 @@ $.ajax("/api/v1/githubToken", {
           type: 'SET_TOKEN',
           token: resp,
         });
+        history.history.push("/")
+        store.dispatch({
+            type: 'CLEAR_LOGIN_FORM'
+          });
       },
       error: (err) => {
         console.log(err)

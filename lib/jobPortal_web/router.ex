@@ -32,5 +32,6 @@ defmodule JobPortalWeb.Router do
    scope "/api/v1", JobPortalWeb do
      pipe_through :api
      resources "/users", UserController, except: [:new, :edit]
+     post "/token", TokenController, :create
    end
 end

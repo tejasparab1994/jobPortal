@@ -49,10 +49,17 @@ function token(state = null, action) {
   }
 }
 
+let empty_login = {
+  name: "",
+  pass: "",
+};
+
 function login(state = empty_login, action) {
   switch (action.type) {
     case 'UPDATE_LOGIN_FORM':
       return Object.assign({}, state, action.data);
+    case 'CLEAR_LOGIN_FORM':
+      return empty_login;
     default:
       return state;
   }
@@ -73,10 +80,7 @@ function userForm(state = empty_user_form, action ) {
 
 }
 
-let empty_login = {
-  name: "",
-  pass: "",
-};
+
 
 function users(state = [], action) {
   switch (action.type) {
