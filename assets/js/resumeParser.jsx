@@ -1,6 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import Chip from 'material-ui/Chip';
+
+const styles = {
+  uploadButton: {
+    verticalAlign: 'middle',
+  },
+  uploadInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+};
 
 class ResumeParser extends React.Component {
 
@@ -41,15 +61,31 @@ class ResumeParser extends React.Component {
 
   render() {
     return (
-      <form onSubmit={(ev)=>this.onFormSubmit(ev)}>
-        <h1>File Upload</h1>
-        <input id="fileform" type="file" name="file" onChange={(ev)=>this.update(ev)} />
-        <button type="submit">Upload</button>
-        <button name="clear" onClick={(ev)=>this.clear(ev)}>Clear</button>
+      <div className="container-fluid organizer-padding">
+        <form onSubmit={(ev)=>this.onFormSubmit(ev)}>
+          <div>
+            <RaisedButton
+              label="Select Your Resume"
+              labelPosition="before"
+              style={styles.uploadButton}
+              containerElement="label"
+              secondary={true}>
+              <input id="fileform" type="file" name="file" onChange={(ev)=>this.update(ev)} style={styles.uploadInput} />
+            </RaisedButton>
+            {this.props.resume.name != "" ? <div className="file-name"><Chip> {this.props.resume.name} </Chip></div> : <div className="gap"></div>}
+          </div>
+          <RaisedButton
+            label="Upload"
+            type="submit"
+            className="button-submit"
+            primary={true}
+          />
+          <RaisedButton label="clear"
+            onClick={(ev)=>this.clear(ev)}/>
+        </form>
+      </div>
+          )
+        }
+      }
 
-      </form>
-    )
-  }
-}
-
-export default connect((state) => state)(ResumeParser);
+      export default connect((state) => state)(ResumeParser);
