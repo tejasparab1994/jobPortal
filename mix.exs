@@ -42,7 +42,9 @@ defmodule JobPortal.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:httpoison, "~> 0.13"}, 
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:comeonin, "~> 4.0"},
+      {:argon2_elixir, "~> 1.2"}
     ]
   end
 

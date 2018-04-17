@@ -10,11 +10,23 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {AppBar} from 'material-ui';
 import { Provider, connect } from 'react-redux';
 import JobDetails from './job-details'
-
+import UserForm from './newUser'
 import Scorer from './scorer'
 
 export default function home_init(root, store, channel) {
   ReactDOM.render(<Provider store={store}><App state={store.getState()} channel={channel} /></Provider>, root);
+  let tokenval = document.getElementById("token-carrier")
+    let user_id = document.getElementById("user-id")
+    if(tokenval.dataset.token != null) {
+        let resp = {
+            user_id: tokenval.dataset.userid,
+            token: tokenval.dataset.token
+        }
+        store.dispatch({
+            type: 'SET_TOKEN',
+            token: resp,
+          });
+    }
   // ReactDOM.render(<Provider store={store}> <App state={store.getState()} /> </Provider>, root);
 }
 
@@ -28,16 +40,16 @@ class Jobs extends React.Component {
   render() {
     return(
       <Router>
-        <MuiThemeProvider muiTheme={Mui}>
-        <div>
-            <Navbar channel={this.props.channel}/>
-            <div className="container">
+            <MuiThemeProvider muiTheme={Mui}>
+            <Navbar channel={this.props.channel} token = {this.props.token}/>
+            <div className= "container">
             <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
+            <Route path="/githubToken" exact={false} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
+            <Route path="/register" exact={false} render={(history) => <div> <UserForm history = {history}/> </div>} />
             <Route path="/tools" render={() => <Scorer />} />
             <Route path="/profile" render={() => <Profile channel={this.props.channel} />} />
             <Route name="description" path="/description/:id" render={(id) => <JobDetails id={id.match.params.id} />} />
             </div>
-      </div>
     </MuiThemeProvider>
     </Router>
     )

@@ -13,7 +13,19 @@ import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import store from './store';
+import api from './api';
+function logout() {
+  store.dispatch({
+    type: 'LOGOUT'
+  });
+  
+}
 
+function login() {
+  api.requestGithub();
+}
 export default class Navbar extends React.Component {
   render() {
     return(
@@ -24,7 +36,7 @@ export default class Navbar extends React.Component {
           title="Jobs."
           zDepth = {0}
           showMenuIconButton={false}
-          iconElementRight = {false? this.beforeLogin(): this.afterLogin()}
+          iconElementRight = {(this.props.token==null)? this.beforeLogin(): this.afterLogin()}
         /></div>
       </AppBar>
         {/* <nav className="navbar navbar-light navbar-expand-lg navbar-blue">
@@ -37,7 +49,14 @@ export default class Navbar extends React.Component {
 
 beforeLogin() {
   return(
-    <FlatButton {...this.props} label="Login" />
+    <div>
+    <FlatButton {...this.props} onClick = {login} label="Login" />
+    <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5"><IconButton
+      iconClassName="muidocs-icon-custom-github" tooltip="Login With Github"
+      tooltipPosition="bottom-right"
+    /></a>
+    <Link to="/register"><FlatButton {...this.props}  label="Register" /></Link>
+    </div>
   )
 }
 
@@ -53,7 +72,8 @@ afterLogin() {
       <NavLink to="/"><MenuItem primaryText="Home" /></NavLink>
       <NavLink to="/tools"><MenuItem primaryText="Tools" /></NavLink>
       <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
-      <MenuItem primaryText="Log out" />
+      <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
+      <NavLink to="#" onClick = {logout}><MenuItem primaryText="Logout" /></NavLink>
     </IconMenu>
   )
 }

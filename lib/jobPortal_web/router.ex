@@ -24,10 +24,13 @@ defmodule JobPortalWeb.Router do
     get("/profile", PageController, :home)
     post("/jobList", PageController, :jobList)
     get("/description/:id", PageController, :home)
+    get "/githubToken", PageController, :githubLogin
+    get "/register", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", JobPortalWeb do
-  #   pipe_through :api
-  # end
+   #Other scopes may use custom stacks.
+   scope "/api/v1", JobPortalWeb do
+     pipe_through :api
+     resources "/users", UserController, except: [:new, :edit]
+   end
 end

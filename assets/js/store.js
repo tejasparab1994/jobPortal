@@ -26,6 +26,69 @@ function jobs(state = [], action) {
   }
 }
 
+function users(state = [], action) {
+  return state;
+}
+
+let empty_user_form = {
+  name: "",
+  email: "",
+  password: "",
+  login_type: "Register"
+};
+
+function token(state = null, action) {
+  switch (action.type) {
+    case 'SET_TOKEN':
+      console.log(action.token)
+      return action.token;
+    case 'LOGOUT' :
+      return null;
+    default:
+      return state;
+  }
+}
+
+function login(state = empty_login, action) {
+  switch (action.type) {
+    case 'UPDATE_LOGIN_FORM':
+      return Object.assign({}, state, action.data);
+    default:
+      return state;
+  }
+}
+
+function userForm(state = empty_user_form, action ) {
+
+  switch (action.type) {
+    case 'UPDATE_USER_FORM':
+      return Object.assign({}, state, action.data);
+   case 'CLEAR_USER_FORM':
+      return empty_user_form;
+   case 'SET_TOKEN':
+      return Object.assign({}, state, action.token);
+    default:
+      return state;
+  }
+
+}
+
+let empty_login = {
+  name: "",
+  pass: "",
+};
+
+function users(state = [], action) {
+  switch (action.type) {
+  case 'USERS_LIST':
+    return [...action.users];
+  case 'ADD_USER':
+  return [action.user, ...state];
+  default:
+    return state;
+  }
+}
+
 let empty_resume = {
   file: null,
   name: "",
@@ -58,11 +121,10 @@ function searchParams(state = empty_searchParams, action) {
 }
 
 function root_reducer(state0, action) {
-  let reducer = combineReducers({jobs, searchParams, resume});
+  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm});
   let state1 = reducer(state0, action);
   console.log("ReduxState", state1);
   return deepFreeze(state1);
 };
-
 let store = createStore(root_reducer);
 export default store;

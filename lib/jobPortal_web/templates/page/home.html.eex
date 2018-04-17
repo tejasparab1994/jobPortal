@@ -1,1 +1,6 @@
+<div>
+<%= if assigns[:auth_token] do %>
+<div id="token-carrier" data-token="<%= @auth_token %>" data-userid="<%= @userid %>" data-name="<%= @username %>" data-email="<%= @useremail %>"></div>
+<% end %>
 <div id="root">Loading</div>
+</div>
