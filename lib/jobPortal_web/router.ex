@@ -23,6 +23,7 @@ defmodule JobPortalWeb.Router do
     get("/", PageController, :home)
     get("/profile", PageController, :home)
     post("/jobList", PageController, :jobList)
+    get("/description/:id", PageController, :home)
   end
 
   # Other scopes may use custom stacks.

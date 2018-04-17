@@ -6,10 +6,9 @@ import { connect } from 'react-redux';
 class Results extends React.Component {
 
   render() {
-    console.log("results", this.props);
     let jobs = _.map(this.props.jobs, (job) => <Job key={job.id} job={job} />);
     return(<div className="container-fluid">
-    Results
+    {jobs.length > 0 ? <div className="container-fluid organizer-padding">Found {jobs.length} results </div> : <div></div>}
     {jobs}
   </div>)
 }

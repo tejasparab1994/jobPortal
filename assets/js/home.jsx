@@ -9,6 +9,7 @@ import Mui from './mui';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {AppBar} from 'material-ui';
 import { Provider, connect } from 'react-redux';
+import JobDetails from './job-details'
 
 import Scorer from './scorer'
 
@@ -34,6 +35,7 @@ class Jobs extends React.Component {
             <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
             <Route path="/tools" render={() => <Scorer />} />
             <Route path="/profile" render={() => <Profile channel={this.props.channel} />} />
+            <Route name="description" path="/description/:id" render={(id) => <JobDetails id={id.match.params.id} />} />
             </div>
       </div>
     </MuiThemeProvider>
