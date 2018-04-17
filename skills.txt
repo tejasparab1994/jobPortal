@@ -1,0 +1,100 @@
+Java
+C++
+C
+Python
+JavaScript
+HTML
+Cascading Style Sheets (CSS)
+Programming
+Computer Science
+PHP
+SQL
+Linux
+HTML5
+C#
+MySQL
+Redux
+Phoenix
+Windows
+Algorithms
+Android Development
+Web Development
+Software Development
+macOS
+Data Structures
+Object-Oriented Programming (OOP)
+Git
+Machine Learning
+Android
+Selenium
+Node.js
+AngularJS
+Tableau	
+Apache Hadoop
+NoSQL
+Chef
+Data Visualization
+Nginx
+Puppet
+Ubuntu
+Revit
+Ruby
+Marketo
+Software Engineering
+Firebase
+R
+Objective-C
+Swift
+Cloud
+AWS
+Internet Of Things
+ReactJS
+VueJS
+Big Data
+RESTful
+ASP
+.NET
+Falcon
+Tensorflow
+Memcached
+ES6
+PHP
+jQuery
+iOS
+Unix
+Kafka
+Spring
+Hibernet
+Docker
+Jenkins
+Maven
+Ajax
+LAMP
+Wordpress
+SPSS
+IIS
+REST
+API
+UI
+XML
+Natural Language Processing
+SQLite
+Android Studio
+Servlets
+Analytics
+MongoDB
+Redis
+PostgreSQL
+Elastic Search
+Apache Lucene
+GitHub
+Django
+Flask
+JSON
+DevOps
+Hive
+Information Retrieval
+Spark
+OAuth2
+Backend
+Apache Velocity

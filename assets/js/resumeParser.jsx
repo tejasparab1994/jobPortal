@@ -63,29 +63,25 @@ class ResumeParser extends React.Component {
     return (
       <div className="container-fluid organizer-padding">
         <form onSubmit={(ev)=>this.onFormSubmit(ev)}>
-          <div>
+          <div className="row d-flex align-items-center">
             <RaisedButton
-              label="Select Your Resume"
+              className=""
+              label="Update Resume"
               labelPosition="before"
               style={styles.uploadButton}
               containerElement="label"
               secondary={true}>
               <input id="fileform" type="file" name="file" onChange={(ev)=>this.update(ev)} style={styles.uploadInput} />
             </RaisedButton>
-            {this.props.resume.name != "" ? <div className="file-name"><Chip> {this.props.resume.name} </Chip></div> : <div className="gap"></div>}
+            {this.props.resume.name != "" ? <Chip className="ml-1 mr-1" onRequestDelete={(ev)=>this.clear(ev)}> {this.props.resume.name} </Chip> : <div></div>}
+            {this.props.resume.name != "" ? <RaisedButton className="mt-1" label="Upload" type="submit" className="button-submit" primary={true}/> :<div></div>}
           </div>
-          <RaisedButton
-            label="Upload"
-            type="submit"
-            className="button-submit"
-            primary={true}
-          />
-          <RaisedButton label="clear"
-            onClick={(ev)=>this.clear(ev)}/>
+          <div className="gap"></div>
+
         </form>
       </div>
-          )
-        }
-      }
+    )
+  }
+}
 
-      export default connect((state) => state)(ResumeParser);
+export default connect((state) => state)(ResumeParser);

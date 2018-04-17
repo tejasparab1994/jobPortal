@@ -17,12 +17,16 @@ import {NavLink} from 'react-router-dom';
 export default class Navbar extends React.Component {
   render() {
     return(
-      <div className="container-fluid">
+      <div className="containerd-fluid">
+        <AppBar showMenuIconButton={false} titleStyle={{flex: 0}}>
+          <div className="container">
         <AppBar
           title="Jobs."
+          zDepth = {0}
           showMenuIconButton={false}
           iconElementRight = {false? this.beforeLogin(): this.afterLogin()}
-        />
+        /></div>
+      </AppBar>
         {/* <nav className="navbar navbar-light navbar-expand-lg navbar-blue">
           <a className="navbar-brand text-light">Jobs.</a>
           <UserOptions />

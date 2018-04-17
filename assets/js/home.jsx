@@ -27,14 +27,16 @@ class Jobs extends React.Component {
   render() {
     return(
       <Router>
+        <MuiThemeProvider muiTheme={Mui}>
         <div>
-          <MuiThemeProvider muiTheme={Mui}>
             <Navbar channel={this.props.channel}/>
+            <div className="container">
             <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
             <Route path="/tools" render={() => <Scorer />} />
             <Route path="/profile" render={() => <Profile channel={this.props.channel} />} />
-        </MuiThemeProvider>
+            </div>
       </div>
+    </MuiThemeProvider>
     </Router>
     )
   }
