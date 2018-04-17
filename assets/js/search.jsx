@@ -56,6 +56,7 @@ class Search extends React.Component {
         />
 
         <RaisedButton
+          className="search-margin"
           label="Search"
           onClick={(ev)=>this.submit(ev)}
           primary={true}
