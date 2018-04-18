@@ -14,7 +14,7 @@ render() {
   let job = this.props.jobs.filter((el) => {
     return(el.id === this.props.id)
   })
-  return(<div className="container-fluid">
+  return(<div className="container">
   <Card>
     <CardHeader
       title={job[0].title}
