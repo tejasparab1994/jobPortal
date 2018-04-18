@@ -37,6 +37,13 @@ class Jobs extends React.Component {
     console.log(props);
   }
 
+  componentDidMount() {
+    if (window.innerWidth < 1200) {
+      this.props.dispatch({type: "SET_MOBILE"})
+    }
+
+  }
+
   render() {
     return(
       <Router>

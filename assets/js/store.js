@@ -45,6 +45,17 @@ function jobs(state = [], action) {
   }
 }
 
+function isMobile(state = false, action) {
+  switch(action.type) {
+    case 'SET_MOBILE':
+    return true;
+    case 'SET_DESKTOP':
+    return false;
+    default:
+    return state;
+  }
+}
+
 function users(state = [], action) {
   return state;
 }
@@ -155,7 +166,7 @@ function searchParams(state = empty_searchParams, action) {
 }
 
 function root_reducer(state0, action) {
-  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm, scorer, loading});
+  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm, scorer, loading, isMobile});
   let state1 = reducer(state0, action);
   console.log("ReduxState", state1);
   return deepFreeze(state1);

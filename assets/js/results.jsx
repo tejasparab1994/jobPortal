@@ -8,7 +8,9 @@ class Results extends React.Component {
 
   render() {
     if(this.props.loading) {
-      return(<CircularProgress style={{marginLeft: '50%', marginTop: '15%'}} size={80}/>)
+      return(
+      <img className="img-fluid loading" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"></img>
+    )
     }
     let jobs = _.map(this.props.jobs, (job) => <Job key={job.id} job={job} />);
     return(<div className="container-fluid">
