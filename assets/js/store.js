@@ -16,6 +16,25 @@ import deepFreeze from 'deep-freeze';
   //     type: github/ private,
   //   }
   // }
+  let empty_scorer = {
+    description: "",
+    score: "",
+    skillsRequired: [],
+    skillsPresent: []
+  };
+function scorer(state=empty_scorer, action) {
+  switch (action.type) {
+    case 'UPDATE_SCORER_DESCRIPTION':
+    return Object.assign({}, state, action.data);
+    case 'UPDATE_SCORER_SCORE':
+    return Object.assign({}, state, action.data);
+    case "RESET_SCORER":
+    return empty_scorer;
+    default:
+    return state;
+
+  }
+}
 
 function jobs(state = [], action) {
   switch (action.type) {
@@ -125,7 +144,7 @@ function searchParams(state = empty_searchParams, action) {
 }
 
 function root_reducer(state0, action) {
-  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm});
+  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm, scorer});
   let state1 = reducer(state0, action);
   console.log("ReduxState", state1);
   return deepFreeze(state1);

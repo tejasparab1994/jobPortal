@@ -29,7 +29,7 @@ Android
 Selenium
 Node.js
 AngularJS
-Tableau	
+Tableau
 Apache Hadoop
 NoSQL
 Chef
@@ -49,6 +49,16 @@ Cloud
 AWS
 Internet Of Things
 ReactJS
+reactstrap
+react
+elixir
+Go
+Haskell
+Clojure
+Python
+Angular
+React
+Ember
 VueJS
 Big Data
 RESTful

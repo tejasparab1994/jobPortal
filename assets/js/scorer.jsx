@@ -2,26 +2,91 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card'
+import { connect } from 'react-redux';
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
 
-export default class Scorer extends React.Component {
+class Scorer extends React.Component {
+  onReset(ev){
+    this.props.dispatch({type: 'RESET_SCORER'});
+  }
+  onChange(ev) {
+    let tgt = $(ev.target);
+    let value = ev.target.value;
+    console.log(value);
+    let data = {};
+    data[tgt.attr('name')] = value;
+
+    let action = {
+      type: 'UPDATE_SCORER_DESCRIPTION',
+      data: data,
+    };
+    this.props.dispatch(action);
+  }
+
+  onSubmit(ev){
+    let payload = {description: this.props.scorer.description}
+    this.props.channel.push("GET_SCORE_FROM_DESCRIPTION", payload)
+    .receive("ok", resp => this.onReceive(resp.score, resp.skillsRequired, resp.skillsPresent))
+  }
+  onReceive(score, skillsRequired, skillsPresent){
+    let action = {
+      type: 'UPDATE_SCORER_SCORE',
+      data: {
+        "score": score,
+        "skillsRequired": skillsRequired,
+        "skillsPresent": skillsPresent
+      },
+    };
+    this.props.dispatch(action)
+  }
+
+  result(){
+    let comps = <div></div>
+    let skillsPresent = _.map(this.props.scorer.skillsPresent, (job) => <ListItem primaryText={job} />);
+    let skillsRequired = _.map(this.props.scorer.skillsRequired, (job) => <ListItem primaryText={job} />);
+
+    if (this.props.scorer.score.length != 0){
+      comps =<div className="row">
+        <Card> <CardTitle><div className="pr-5">Skills You Have</div></CardTitle><List> {skillsPresent} </List></Card>
+        <Card> <CardTitle><div className="pr-5">Skills Required</div></CardTitle><List> {skillsRequired} </List></Card>
+    </div>
+    }
+
+    return comps
+  }
   render() {
+    console.log("Scorer", this.props);
     return(<div className="container-fluid">
     <div className="scorer">
-    <p>Paste the text of the job description in the box below. Click on MATCH! and find out how closely your resume matches to this job description</p>
+      <p>Paste the text of the job description in the box below. Click on MATCH! and find out how closely your resume matches to this job description</p>
     </div>
     <div className="scorer">
-    <TextField
-      floatingLabelText="Enter job description"
-      multiLine={true}
-      rowsMax={10}
-      fullWidth={true}
-      />
-    <RaisedButton label="Match!" primary={true}/>
-    </div>
-    <div className="scorer">
-    <p className="display2">Your score is</p>
-    <h5>100%</h5>
-    </div>
-  </div>)
+      <TextField
+        floatingLabelText="Enter job description"
+        multiLine={true}
+        rowsMax={10}
+        fullWidth={true}
+        name="description"
+        onChange={(ev)=>this.onChange(ev)}
+        />
+      <RaisedButton onClick= {(ev)=>this.onSubmit(ev)} label="Match!" primary={true}/>&nbsp;
+        <RaisedButton onClick= {(ev)=>this.onReset(ev)} label="Reset" primary={true}/>
+      </div>
+      <div className="scorer">
+
+        <h5 className="display2">Your score is {this.props.scorer.score}</h5>
+        {this.result()}
+      </div>
+    </div>)
+  }
 }
+
+function state2props(state) {
+
+  return { scorer: state.scorer};
 }
+
+export default connect(state2props)(Scorer);

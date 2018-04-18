@@ -16,10 +16,14 @@ defmodule JobPortalWeb.UserChannel do
     payload1 = payload
     |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
     payload2 = Map.put(payload1, :binary, Base.decode64!(payload1.binary))
-      JobPortal.ResumeParser.parse(payload2.binary)
-      # IO.inspect resp.body
-      # IO.inspect payload2
-      {:reply, {:ok, payload}, socket}
-    end
-
+    JobPortal.ResumeParser.parse(payload2.binary)
+    {:reply, {:ok, payload}, socket}
   end
+
+  def handle_in("GET_SCORE_FROM_DESCRIPTION", payload, socket) do
+
+    response = JobPortal.Scorer.get_score(payload["description"])
+    {:reply, {:ok, response}, socket}
+  end
+
+end

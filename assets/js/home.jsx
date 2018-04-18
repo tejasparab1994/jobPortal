@@ -46,7 +46,7 @@ class Jobs extends React.Component {
             <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
             <Route path="/githubToken" exact={false} render={() => <div><Search channel={this.props.channel} /> <Results jobs={this.props.state.jobs} channel={this.props.channel}/> </div>} />
             <Route path="/register" exact={false} render={(history) => <div> <UserForm history = {history}/> </div>} />
-            <Route path="/tools" render={() => <Scorer />} />
+            <Route path="/tools" render={() => <Scorer channel={this.props.channel} />} />
             <Route path="/profile" render={() => <Profile channel={this.props.channel} />} />
             <Route name="description" path="/description/:id" render={(id) => <JobDetails id={id.match.params.id} />} />
             </div>
