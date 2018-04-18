@@ -7,8 +7,8 @@ defmodule JobPortalWeb.UserChannel do
   end
 
   def handle_in("search", payload, socket) do
-    %{"title" => title, "location" => location} = payload
-    data = JobPortal.ApiFetch.getJobs(title, location)
+    %{"title" => title, "location" => location, "page" => page, "jobids"=> jobids} = payload
+    data = JobPortal.ApiFetch.getJobs(title, location, page, jobids)
     {:reply, {:ok, data}, socket}
   end
 

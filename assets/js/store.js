@@ -1,27 +1,27 @@
 import { createStore, combineReducers } from 'redux';
 import deepFreeze from 'deep-freeze';
 
-  //
-  // state layout:
-  // {
-  //   jobs: [... Jobs ...],
-  //   searchParams: {
-  //     title: "",
-  //     location: "",
-  //   }
-  //   user: {
-  //     user_id: Number,
-  //     user_name: String,
-  //     token: String,
-  //     type: github/ private,
-  //   }
-  // }
-  let empty_scorer = {
-    description: "",
-    score: "",
-    skillsRequired: [],
-    skillsPresent: []
-  };
+//
+// state layout:
+// {
+//   jobs: [... Jobs ...],
+//   searchParams: {
+//     title: "",
+//     location: "",
+//   }
+//   user: {
+//     user_id: Number,
+//     user_name: String,
+//     token: String,
+//     type: github/ private,
+//   }
+// }
+let empty_scorer = {
+  description: "",
+  score: "",
+  skillsRequired: [],
+  skillsPresent: []
+};
 function scorer(state=empty_scorer, action) {
   switch (action.type) {
     case 'UPDATE_SCORER_DESCRIPTION':
@@ -38,8 +38,10 @@ function scorer(state=empty_scorer, action) {
 
 function jobs(state = [], action) {
   switch (action.type) {
-    case 'UPDATE_JOB_LIST':
+    case 'ADD_JOB_LIST':
     return [...action.data];
+    case 'UPDATE_JOB_LIST':
+    return [...state, ...action.data];
     default:
     return state;
   }
@@ -59,12 +61,12 @@ let empty_user_form = {
 function token(state = null, action) {
   switch (action.type) {
     case 'SET_TOKEN':
-      console.log(action.token)
-      return action.token;
+    console.log(action.token)
+    return action.token;
     case 'LOGOUT' :
-      return null;
+    return null;
     default:
-      return state;
+    return state;
   }
 }
 
@@ -76,11 +78,11 @@ let empty_login = {
 function login(state = empty_login, action) {
   switch (action.type) {
     case 'UPDATE_LOGIN_FORM':
-      return Object.assign({}, state, action.data);
+    return Object.assign({}, state, action.data);
     case 'CLEAR_LOGIN_FORM':
-      return empty_login;
+    return empty_login;
     default:
-      return state;
+    return state;
   }
 }
 
@@ -88,13 +90,13 @@ function userForm(state = empty_user_form, action ) {
 
   switch (action.type) {
     case 'UPDATE_USER_FORM':
-      return Object.assign({}, state, action.data);
-   case 'CLEAR_USER_FORM':
-      return empty_user_form;
-   case 'SET_TOKEN':
-      return Object.assign({}, state, action.token);
+    return Object.assign({}, state, action.data);
+    case 'CLEAR_USER_FORM':
+    return empty_user_form;
+    case 'SET_TOKEN':
+    return Object.assign({}, state, action.token);
     default:
-      return state;
+    return state;
   }
 
 }
@@ -103,11 +105,11 @@ function userForm(state = empty_user_form, action ) {
 
 function users(state = [], action) {
   switch (action.type) {
-  case 'USERS_LIST':
+    case 'USERS_LIST':
     return [...action.users];
-  case 'ADD_USER':
-  return [action.user, ...state];
-  default:
+    case 'ADD_USER':
+    return [action.user, ...state];
+    default:
     return state;
   }
 }
@@ -130,6 +132,8 @@ function resume(state=empty_resume, action) {
 let empty_searchParams = {
   title: "",
   location: "",
+  page: 0,
+  alldisp: false,
 };
 
 function searchParams(state = empty_searchParams, action) {
@@ -138,6 +142,12 @@ function searchParams(state = empty_searchParams, action) {
     return Object.assign({}, state, action.data);
     case 'ON_SUBMIT':
     return state;
+    case 'INCREMENT_PAGE':
+    return Object.assign({}, state, {page: state.page+1});
+    case 'RESET_PAGE':
+    return Object.assign({}, state, {page: 0, alldisp: false,});
+    case 'ALL_JOBS_DISPLAYED':
+    return Object.assign({}, state, {alldisp: true});
     default:
     return state;
   }
