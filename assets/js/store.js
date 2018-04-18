@@ -169,6 +169,8 @@ function searchParams(state = empty_searchParams, action) {
     return Object.assign({}, state, {page: state.page+1});
     case 'RESET_PAGE':
     return Object.assign({}, state, {page: 0, alldisp: false,});
+    case 'RESET_FORM':
+    return empty_searchParams;
     case 'ALL_JOBS_DISPLAYED':
     return Object.assign({}, state, {alldisp: true});
     default:
