@@ -13,7 +13,12 @@
 .search-input {
   top: 25%;
   padding: 10%;
+  width: 100%;
   text-align: center;
+  background-image: linear-gradient(#f9f9f9, #ffffff);
+  //background:url(https://images.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg) no-repeat center center scroll;
+  //background-size: 100% auto;
+  //background-position: 100% 50%;
 }
 
 .navbar-blue {
@@ -22,6 +27,13 @@
 
 .filters-box {
   background-color: #313335;
+}
+
+.nav-login {
+  color: white;
+  display: inline-block;
+  line-height: 100%;
+  vertical-align: middle;
 }
 
 .form-components {
@@ -58,7 +70,6 @@
 .search-margin{
   margin-left: 1%;
 }
-
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
