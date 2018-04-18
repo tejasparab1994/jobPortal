@@ -27,21 +27,24 @@ class Search extends React.Component {
 
   submit(ev){
     //console.log("searchParams", this.props);
+    this.props.dispatch({type: "SET_TRUE"})
     this.params.channel.push("search", {
       title: this.props.params.title,
       location: this.props.params.location,
+
     }).receive("ok", resp=> {
       //console.log(resp.github.concat(resp.authenticJobs));
+      this.props.dispatch({type: "SET_FALSE"})
       let action = {
       type: 'UPDATE_JOB_LIST',
       data: resp.github.concat(resp.authenticJobs),
+
     };
 
     this.params.dispatch(action);})
   }
 
   render() {
-
     return(
       <div className="search-input">
         <TextField
