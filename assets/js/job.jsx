@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom'
 
 export default class Job extends React.Component {
   render() {
-    console.log(this.props.jobs);
     return(<div className="container-fluid">
 
     <Card>

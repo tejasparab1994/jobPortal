@@ -59,6 +59,7 @@ class Search extends React.Component {
 
   submit(ev){
     //console.log("searchParams", this.props);
+    this.props.dispatch({type: "SET_TRUE"})
     this.params.dispatch({type: 'RESET_PAGE'});
     this.params.channel.push("search", {
       title: this.props.params.title,
@@ -67,6 +68,7 @@ class Search extends React.Component {
       jobids:[]
     }).receive("ok", resp=> {
       //console.log(resp.github.concat(resp.authenticJobs));
+      this.props.dispatch({type: "SET_FALSE"})
       let action = {
         type: 'ADD_JOB_LIST',
         data: resp.github.concat(resp.authenticJobs),
