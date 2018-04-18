@@ -51,9 +51,9 @@ $.ajax("/api/v1/githubToken", {
         });
         location.href = "/"
       },
-      error: (error) => {
-        console.log(error)
-        alert("validation errors")
+      error: function(xhr) {
+       console.log("some error")
+        alert(xhr.responseJSON)
       }
     });
   }
@@ -95,10 +95,6 @@ $.ajax("/api/v1/githubToken", {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({id: taskid, task: data}),
       success: (resp) => {
-        console.log("response is")
-        console.log(resp)
-        console.log("history is")
-        console.log(history)
         store.dispatch({
           type: 'UPDATE_TASK'
         });

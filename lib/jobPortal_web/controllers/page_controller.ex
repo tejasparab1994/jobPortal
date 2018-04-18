@@ -51,8 +51,14 @@ defmodule JobPortalWeb.PageController do
     responseBody = String.replace(responseBody, "access_token=","")
    resp = HTTPoison.get!("https://api.github.com/user?access_token=#{responseBody}")
    authenticdata = Poison.decode!(resp.body)
+   IO.inspect(resp)
    IO.inspect(authenticdata["login"])
    gituser = %{id: authenticdata["id"], name: authenticdata["login"], email: authenticdata["email"]   }
+   exists? = JobPortal.Accounts.checkifexists(authenticdata["login"])
+   if(exists? == false) do
+      user =  %{"name" => authenticdata["login"], "email" =>  "fauxEmail@github.com", "password" => "gitPassword", "login_type" => "git"}
+      JobPortal.Accounts.create_user(user)
+   end
    token = %{token: responseBody, user: gituser}
    conn
    |> assign(:auth_token, responseBody)
