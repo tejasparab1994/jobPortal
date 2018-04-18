@@ -20,7 +20,7 @@ function logout() {
   store.dispatch({
     type: 'LOGOUT'
   });
-  
+
 }
 
 function login() {
@@ -50,12 +50,11 @@ export default class Navbar extends React.Component {
 beforeLogin() {
   return(
     <div>
-    <FlatButton {...this.props} onClick = {login} label="Login" />
-    <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5"><IconButton
+    {/*<a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5"><IconButton
       iconClassName="muidocs-icon-custom-github" tooltip="Login With Github"
       tooltipPosition="bottom-right"
-    /></a>
-    <Link to="/register"><FlatButton {...this.props}  label="Register" /></Link>
+    /></a>*/}
+    <Link to="/register"><FlatButton {...this.props}  label="Register/Login" /></Link>
     </div>
   )
 }
@@ -71,7 +70,6 @@ afterLogin() {
     >
       <NavLink to="/"><MenuItem primaryText="Home" /></NavLink>
       <NavLink to="/tools"><MenuItem primaryText="Tools" /></NavLink>
-      <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
       <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
       <NavLink to="#" onClick = {logout}><MenuItem primaryText="Logout" /></NavLink>
     </IconMenu>
