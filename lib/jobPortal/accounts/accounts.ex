@@ -53,7 +53,8 @@ defmodule JobPortal.Accounts do
     user = %User{}
     IO.inspect(attrs)
     name = Map.get(attrs, "name")
-    exists? = checkifexists(name)
+    type = Map.get(attrs, "login_type")
+    exists? = checkifexists(name, type)
     if(exists? == false) do
     password = Map.get(attrs, "password")
     IO.puts("password is")
@@ -118,13 +119,15 @@ defmodule JobPortal.Accounts do
     User.changeset(user, %{})
   end
   
-  def get_and_auth_user(name, pass) do
-    user = Repo.one(from u in User, where: u.name == ^name)
+  def get_and_auth_user(name, pass, type) do
+    user = Repo.one(from u in User, where: u.name == ^name, where: u.login_type == ^type)
     IO.inspect(user)
     Comeonin.Argon2.check_pass(user, pass)
   end
-  def checkifexists(name) do
-    user = Repo.one(from u in User, select: count("*"), where: u.name == ^name)
+  
+
+  def checkifexists(name, type) do
+    user = Repo.one(from u in User, select: count("*"), where: u.name == ^name, where: u.login_type == ^type)
     value = true
     value = if(user == 0) do
       false
@@ -133,4 +136,22 @@ defmodule JobPortal.Accounts do
     end
     value
   end
+
+  def checkifGithubexists(name) do
+    user = Repo.one(from u in User, select: count("*"), where: u.name == ^name, where: u.login_type=="git")
+    value = true
+    value = if(user == 0) do
+      false
+    else 
+      true
+    end
+    value
+  end
+
+  def getUserId(name, type) do
+    id = Repo.one(from u in User, select: u.id, where: u.name == ^name, where: u.login_type== ^type)
+    id
+  end
+
+
 end

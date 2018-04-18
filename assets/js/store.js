@@ -84,6 +84,7 @@ function token(state = null, action) {
 let empty_login = {
   name: "",
   pass: "",
+  type: "Register"
 };
 
 function login(state = empty_login, action) {

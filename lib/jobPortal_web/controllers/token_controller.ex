@@ -4,8 +4,8 @@ defmodule JobPortalWeb.TokenController do
   
     action_fallback JobPortalWeb.FallbackController
   
-    def create(conn, %{"name" => name,  "pass" => pass}) do
-      with {:ok, %User{} = user} <- JobPortal.Accounts.get_and_auth_user(name, pass) do
+    def create(conn, %{"name" => name,  "pass" => pass, "type" => type}) do
+      with {:ok, %User{} = user} <- JobPortal.Accounts.get_and_auth_user(name, pass, type) do
         token = Phoenix.Token.sign(conn, "auth token", user.id)
         conn
         |> put_status(:created)
