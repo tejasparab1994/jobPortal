@@ -13,6 +13,7 @@ class Search extends React.Component {
 
   }
   componentDidMount(){
+    this.params.dispatch({type: 'RESET_FORM'});
     window.onscroll = () => {
       var d = document.documentElement;
       var offset = d.scrollTop + window.innerHeight;
@@ -73,7 +74,7 @@ class Search extends React.Component {
         type: 'ADD_JOB_LIST',
         data: resp.github.concat(resp.authenticJobs),
       };
-      this.params.dispatch({type: 'RESET_PAGE'});
+      this.params.dispatch({type: 'RESET_FORM'});
       this.params.dispatch(action);})
     }
 
