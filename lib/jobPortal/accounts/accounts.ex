@@ -52,6 +52,9 @@ defmodule JobPortal.Accounts do
   def create_user(attrs \\ %{}) do
     user = %User{}
     IO.inspect(attrs)
+    name = Map.get(attrs, "name")
+    exists? = checkifexists(name)
+    if(exists? == false) do
     password = Map.get(attrs, "password")
     IO.puts("password is")
     IO.puts(password)
@@ -63,6 +66,9 @@ defmodule JobPortal.Accounts do
     IO.inspect(newUser)
     {:ok, user} = Repo.insert(newUser)
     {:ok, user}
+    else 
+      {:error, "user already exists"}
+    end
   end
 
   @doc """
@@ -116,5 +122,15 @@ defmodule JobPortal.Accounts do
     user = Repo.one(from u in User, where: u.name == ^name)
     IO.inspect(user)
     Comeonin.Argon2.check_pass(user, pass)
+  end
+  def checkifexists(name) do
+    user = Repo.one(from u in User, select: count("*"), where: u.name == ^name)
+    value = true
+    value = if(user == 0) do
+      false
+    else 
+      true
+    end
+    value
   end
 end
