@@ -85,14 +85,19 @@ class Search extends React.Component {
           <TextField
             name="title"
             className="job-description"
-            floatingLabelText="Job"
+            floatingLabelText="Keyword or Title"
+            inputStyle={{ color: 'white', fontSize: '16px' }}
+            floatingLabelStyle ={{color: 'white', fontSize: '16px'}}
             onChange={(ev)=>this.update(ev)}
-            />
+          />
+
           <TextField
             name="location"
             floatingLabelText="Location"
+            inputStyle={{ color: 'white', fontSize: '16px' }}
+            floatingLabelStyle ={{color: 'white', fontSize: '16px'}}
             onChange={(ev)=>this.update(ev)}
-            />
+          />
 
           <RaisedButton
             className="search-margin"

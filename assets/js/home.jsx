@@ -57,16 +57,16 @@ class Jobs extends React.Component {
   render() {
     return(
       <Router>
-            <MuiThemeProvider muiTheme={Mui}>
-            <Navbar channel={this.props.channel} token = {this.props.token}/>
-            <div className= "containerd-fluid">
+        <MuiThemeProvider muiTheme={Mui}>
+          <Navbar channel={this.props.channel} token = {this.props.token}/>
+          <div className= "containerd-fluid">
             <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /><div className="container"><Results jobs={this.props.state.jobs} channel={this.props.channel}/></div></div>} />
             <Route path="/githubToken" exact={false} render={(history) => <div>{history.history.push("/")}</div>} />
             <Route path="/register" exact={false} render={(history) => <div> <UserForm history = {history}/> </div>} />
             <Route path="/tools" render={(history) => this.props.token ? (<Scorer channel={this.props.channel} />) : (<div>{history.history.push("/")}</div>) }/>
             <Route path="/profile" render={(history) => this.props.token ? ( <Profile channel={this.props.channel} />) : (<div> {history.history.push("/")} </div>)} />
             <Route name="description" path="/description/:id" render={(id) => <JobDetails id={id.match.params.id} />} />
-            </div>
+          </div>
     </MuiThemeProvider>
     </Router>
     )

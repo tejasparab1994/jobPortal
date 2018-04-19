@@ -7,37 +7,27 @@
 }
 
 .search-padding {
-  background-color: #ffffff;
+  background-color: #ECECEC;
 }
 
+body {
+  background-color: #ECECEC;
+}
+
+// Attribution for background image: http://www.westdale.com/home%20background/Westdale%20Background%20Image3.jpg
 .search-input {
   top: 25%;
   padding: 7%;
   width: 100%;
   text-align: center;
   background-image: linear-gradient(#f9f9f9, #ddd);
-  //background:url(https://images.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg) no-repeat center center scroll;
-  //background-size: 100% auto;
-  //background-position: 100% 80%;
+  background:url(http://www.westdale.com/home%20background/Westdale%20Background%20Image3.jpg) no-repeat center center scroll;
+  background-size: 100% auto;
+  background-position: 50% 50%;
 }
 
 .navbar-blue {
   background-color: #0077b5;
-}
-
-.skills-compare {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.left {
-  flex: 1 0 50%;
-  text-align: center;
-}
-
-.right {
-  flex: 1 0 50%;
-  text-align: center;
 }
 
 .loading {
@@ -105,6 +95,15 @@
 
 .card-color {
   background-color: #0E85B0;
+}
+
+.job-display {
+  background-color: #ECECEC;
+}
+
+.individual-job {
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
