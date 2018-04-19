@@ -18,11 +18,26 @@
   background-image: linear-gradient(#f9f9f9, #ddd);
   //background:url(https://images.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg) no-repeat center center scroll;
   //background-size: 100% auto;
-  //background-position: 100% 50%;
+  //background-position: 100% 80%;
 }
 
 .navbar-blue {
   background-color: #0077b5;
+}
+
+.skills-compare {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.left {
+  flex: 1 0 50%;
+  text-align: center;
+}
+
+.right {
+  flex: 1 0 50%;
+  text-align: center;
 }
 
 .loading {

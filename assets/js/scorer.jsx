@@ -49,9 +49,17 @@ class Scorer extends React.Component {
     let skillsRequired = _.map(this.props.scorer.skillsRequired, (job) => <ListItem primaryText={job} />);
 
     if (this.props.scorer.score.length != 0){
-      comps =<div className="row">
-        <Card> <CardTitle><div className="pr-5">Skills You Have</div></CardTitle><List> {skillsPresent} </List></Card>
-        <Card> <CardTitle><div className="pr-5">Skills Required</div></CardTitle><List> {skillsRequired} </List></Card>
+      comps =<div>
+        <h5 className="display2">Your score is {this.props.scorer.score}</h5>
+        <div className="organizer-padding"></div>
+        <div className="skills-compare container">
+        <div className="left">
+        <Card><CardTitle><h4>Skills You Have</h4></CardTitle><List> {skillsPresent} </List></Card>
+        </div>
+        <div className="right">
+        <Card> <CardTitle><h4 className="">Skills Required</h4></CardTitle><List> {skillsRequired} </List></Card>
+        </div>
+      </div>
     </div>
     }
 
@@ -59,7 +67,7 @@ class Scorer extends React.Component {
   }
   render() {
     console.log("Scorer", this.props);
-    return(<div className="container-fluid">
+    return(<div className="container">
     <div className="scorer">
       <p>Paste the text of the job description in the box below. Click on MATCH! and find out how closely your resume matches to this job description</p>
     </div>
@@ -77,7 +85,7 @@ class Scorer extends React.Component {
       </div>
       <div className="scorer">
 
-        <h5 className="display2">Your score is {this.props.scorer.score}</h5>
+
         {this.result()}
       </div>
     </div>)
