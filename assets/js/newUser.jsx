@@ -54,13 +54,14 @@ const GitHubIcon = (props) => (
             </FormGroup>
           </CardText>
           <CardActions>
-            <RaisedButton label="Log In" primary={true} onClick = {create_token} />
-            <CardTitle subtitle="Connect Using Other Account:" />
+            <RaisedButton label="Log In" primary={true} fullWidth={true} onClick = {create_token} />
+            <CardTitle className = "subtitle_connect" subtitle="Connect Using Other Account:"/>
             <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5">
               <RaisedButton
                 label="Sign In With GitHub"
-                icon= {<GitHubIcon />} /></a>
-                </CardActions>
+                icon= {<GitHubIcon />}
+                fullWidth={true} /></a>
+          </CardActions>
               </Form>
 
             </Card>
@@ -133,12 +134,12 @@ const GitHubIcon = (props) => (
                       </FormGroup>
                     </CardText>
                     <CardActions>
-                        <input type="hidden" name = "login_type" value="formRegister" />
-                        <RaisedButton label="Sign Up" secondary={true} onClick = {submit} />
-                      </CardActions>
-                    </Card>
-                  </div>
-                  <div className=".col-md-6 bg-success login">
+                      <input type="hidden" name = "login_type" value="formRegister" />
+                      <RaisedButton label="Sign Up" secondary={true} fullWidth={true} onClick = {submit} />
+                    </CardActions>
+                  </Card>
+                </div>
+                <div className=".col-md-6 login">
                     <LoginForm history = {params.history} />
                   </div>
 
