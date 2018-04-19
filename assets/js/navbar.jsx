@@ -71,6 +71,7 @@ beforeLogin() {
 }
 
 afterLogin() {
+
   let loginname = "Logout " + this.props.token.name
   return(
     <div style={{position: 'relative'}}>
@@ -81,9 +82,9 @@ afterLogin() {
       }
       targetOrigin={{horizontal: 'right', vertical: 'top'}}
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-    >
+      >
 
-      
+      <NavLink to="/"><MenuItem primaryText="Home" /></NavLink>
       <NavLink to="/tools"><MenuItem primaryText="Tools" /></NavLink>
       <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
       <NavLink to="/" onClick = {logout}><MenuItem primaryText={loginname} /></NavLink>
