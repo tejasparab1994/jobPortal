@@ -13,7 +13,7 @@ class Results extends React.Component {
     )
     }
     let jobs = _.map(this.props.jobs, (job) => <Job key={job.id} job={job} />);
-    return(<div className="container-fluid">
+    return(<div className="container-fluid job-display">
     {jobs.length > 0 ? <div className="container-fluid organizer-padding">Found {jobs.length} results </div> : <div></div>}
     {jobs}
   </div>)

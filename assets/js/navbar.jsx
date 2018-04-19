@@ -58,14 +58,14 @@ export default class Navbar extends React.Component {
 beforeLogin() {
   return(
     <div>
-    {/*<a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5"><IconButton
-      iconClassName="muidocs-icon-custom-github" tooltip="Login With Github"
-      tooltipPosition="bottom-right"
-    /></a>*/}
+      {/*<a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5"><IconButton
+        iconClassName="muidocs-icon-custom-github" tooltip="Login With Github"
+        tooltipPosition="bottom-right"
+      /></a>*/}
 
-    <Link to="/"><FlatButton {...this.props}  label="Home" labelStyle={{ color: 'white', fontSize: '16px' }}/></Link>
-    <Link to="/register"><FlatButton {...this.props}  label="Register/Login" labelStyle={{ color: 'white', fontSize: '16px' }}/></Link>
-    
+      <Link to="/"><FlatButton {...this.props}  label="Home" labelStyle={{ color: 'white', fontSize: '16px' }}/></Link>
+      <Link to="/register"><FlatButton {...this.props}  label="Register/Login" labelStyle={{ color: 'white', fontSize: '16px' }}/></Link>
+
     </div>
   )
 }

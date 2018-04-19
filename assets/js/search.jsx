@@ -85,7 +85,7 @@ class Search extends React.Component {
           <TextField
             name="title"
             className="job-description"
-            floatingLabelText="Job Keyword or Title"
+            floatingLabelText="Keyword or Title"
             inputStyle={{ color: 'white', fontSize: '16px' }}
             floatingLabelStyle ={{color: 'white', fontSize: '16px'}}
             onChange={(ev)=>this.update(ev)}
