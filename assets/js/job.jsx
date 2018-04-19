@@ -15,6 +15,7 @@ class Job extends React.Component {
         data: job,
       };
       this.props.dispatch(action);
+      alert("job added to your list")
     }
   }
   AddToApplied(ev, job){
@@ -24,6 +25,7 @@ class Job extends React.Component {
         type: 'MOVE_TO_APPLIED',
         data: job,
       };
+      
       this.props.dispatch(action);
     }
   }
@@ -38,10 +40,18 @@ class Job extends React.Component {
     }
   }
   render() {
-    let ApplyButton = this.props.token? <RaisedButton label= "ApplyLater" onClick={(ev)=>{this.applyLater(ev, this.props.job)}}/> : <div></div>;
-    let DApplyButton = this.props.token? <RaisedButton label= "Delete From ApplyLater" onClick={(ev)=>{this.dapplyLater(ev, this.props.job)}}/> : <div></div>;
+    
+    
+    let appliedLaterArray = this.props.ApplyLaterJobs
+    let appliedURLArray = [];
+    for(let i=0; i < appliedLaterArray.length; i++) {
+      appliedURLArray.push(appliedLaterArray[i].url)
+    }
+    let applyraised = appliedURLArray.includes(this.props.job.url)
+   l
+    let ApplyButton = this.props.token? <RaisedButton label= "ApplyLater" disabled = {applyraised} onClick={(ev)=>{this.applyLater(ev, this.props.job)}}/> : <div></div>;
+    let DApplyButton = this.props.token && applyraised == true ? <RaisedButton label= "Delete From ApplyLater" onClick={(ev)=>{this.dapplyLater(ev, this.props.job)}}/> : <div></div>;
     let Applied = (this.props.token && this.props.source==="ApplyLaterTab" )? <RaisedButton label= "Mark as Applied" onClick={(ev)=>{this.AddToApplied(ev, this.props.job)}}/> : <div></div>;
-
         let companyName = null
         if(this.props.job.company instanceof Object) {
           companyName = this.props.job.company.name
