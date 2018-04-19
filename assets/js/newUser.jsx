@@ -32,124 +32,124 @@ const GitHubIcon = (props) => (
       console.log(props.login);
     }
 
-    return <div>
-      <Card>
-        <CardTitle
-          title = "Sign In"
-          titleColor="White"
-          subtitle="With Your Registered Account"
-          subtitleColor="White"
-          className="card-color"
-        />
+    return (
+      <div>
+        <Card>
+          <CardTitle
+            title = "Sign In"
+            titleColor="White"
+            subtitle="With Your Registered Account"
+            subtitleColor="White"
+            className="card-color"
+          />
 
-        <Form>
-          <CardText>
-            <FormGroup>
-              <TextField hintText="Name" floatingLabelText="Name" name="name"
-                value={props.login.name} onChange={update} />
-            </FormGroup>
-            <FormGroup>
-              <TextField hintText="Password" floatingLabelText="Password" name="pass"
-                value={props.login.pass} type="password" onChange={update} />
-            </FormGroup>
-          </CardText>
-          <CardActions>
-            <RaisedButton label="Log In" primary={true} fullWidth={true} onClick = {create_token} />
-            <CardTitle className = "subtitle_connect" subtitle="Connect Using Other Account:"/>
-            <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5">
-              <RaisedButton
-                label="Sign In With GitHub"
-                icon= {<GitHubIcon />}
-                fullWidth={true} /></a>
-          </CardActions>
-              </Form>
+          <Form>
+            <CardText>
+              <FormGroup>
+                <TextField hintText="Name" floatingLabelText="Name" name="name"
+                  value={props.login.name} onChange={update} />
+              </FormGroup>
+              <FormGroup>
+                <TextField hintText="Password" floatingLabelText="Password" name="pass"
+                  value={props.login.pass} type="password" onChange={update} />
+              </FormGroup>
+            </CardText>
+            <CardActions>
+              <RaisedButton label="Log In" primary={true} fullWidth={true} onClick = {create_token} />
+              <CardTitle className = "subtitle_connect" subtitle="Connect Using Other Account:"/>
+              <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5">
+                <RaisedButton
+                  label="Sign In With GitHub"
+                  icon= {<GitHubIcon />}
+                  fullWidth={true} /></a>
+            </CardActions>
+          </Form>
+        </Card>
+            </div>);
+          });
 
-            </Card>
-          </div>;
-        });
+          function UserForm(params) {
+            function update(ev) {
+              let tgt = $(ev.target);
+              let data = {};
+              data[tgt.attr('name')] = tgt.val();
+              let action = {
+                type: 'UPDATE_USER_FORM',
+                data: data,
+              };
+              console.log(action);
+              params.dispatch(action);
+            }
 
-        function UserForm(params) {
-          function update(ev) {
-            let tgt = $(ev.target);
-            let data = {};
-            data[tgt.attr('name')] = tgt.val();
-            let action = {
-              type: 'UPDATE_USER_FORM',
-              data: data,
-            };
-            console.log(action);
-            params.dispatch(action);
-          }
+            function submit(ev) {
+              console.log("Should create User.");
+              console.log(params.userForm);
+              validateInput()
+            }
 
-          function submit(ev) {
-            console.log("Should create User.");
-            console.log(params.userForm);
-            validateInput()
-          }
-
-          function validateInput() {
-            console.log("entered validate input")
-            if( /(.+)@(.+){2,}\.(.+){2,}/.test(params.userForm.email) ) {
-              if(params.userForm.name.length == 0) {
-                alert('name is empty')
-                return false
-              }
-              else {
-                if(params.userForm.password.length == 0)
-                {
-                  alert("password is empty")
+            function validateInput() {
+              console.log("entered validate input")
+              if( /(.+)@(.+){2,}\.(.+){2,}/.test(params.userForm.email) ) {
+                if(params.userForm.name.length == 0) {
+                  alert('name is empty')
                   return false
                 }
                 else {
-                  api.submit_user(params.userForm, params.history);
+                  if(params.userForm.password.length == 0)
+                  {
+                    alert("password is empty")
+                    return false
+                  }
+                  else {
+                    api.submit_user(params.userForm, params.history);
+                  }
                 }
               }
+              else {
+                alert("invalid email")
+                return false
+              }
             }
-            else {
-              alert("invalid email")
-              return false
-            }
-          }
-          return (
-            <div className="container register">
-              <div className="row">
-                <div className=".col-md-6 sign-up">
+            return (
+              <div className="container register">
+                <div className="row">
+                  <div className=".col-md-6 sign-up">
 
-                  <Card>
-                    <CardTitle
-                      title = "Not A Member Yet?"
-                      titleColor="White"
-                      subtitle="Register Here"
-                      subtitleColor="White"
-                    className="card-color"/>
-                    <CardText>
-                      <FormGroup>
-                        <TextField hintText="Enter your Email" floatingLabelText="Email" name="email" onChange={update} value={params.userForm.email}/>
-                      </FormGroup>
-                      <FormGroup>
-                        <TextField hintText="Enter your name" floatingLabelText="Name" name="name" onChange={update} value={params.userForm.name} />
-                      </FormGroup>
-                      <FormGroup>
-                        <TextField hintText="Password Field" floatingLabelText="Password" type="password" name="password" value={params.userForm.password} onChange={update} />
-                      </FormGroup>
-                    </CardText>
-                    <CardActions>
-                      <input type="hidden" name = "login_type" value="formRegister" />
-                      <RaisedButton label="Sign Up" secondary={true} fullWidth={true} onClick = {submit} />
-                    </CardActions>
-                  </Card>
-                </div>
-                <div className=".col-md-6 login">
-                    <LoginForm history = {params.history} />
+                    <Card>
+                      <CardTitle
+                        title = "Not A Member Yet?"
+                        titleColor="White"
+                        subtitle="Register Here"
+                        subtitleColor="White"
+                        className="card-color"/>
+                        <CardText>
+                          <FormGroup>
+                            <TextField hintText="Enter your Email" floatingLabelText="Email" name="email" onChange={update} value={params.userForm.email}/>
+                          </FormGroup>
+                          <FormGroup>
+                            <TextField hintText="Enter your name" floatingLabelText="Name" name="name" onChange={update} value={params.userForm.name} />
+                          </FormGroup>
+                          <FormGroup>
+                            <TextField hintText="Password Field" floatingLabelText="Password" type="password" name="password" value={params.userForm.password} onChange={update} />
+                          </FormGroup>
+                        </CardText>
+                        <CardActions>
+                          <input type="hidden" name = "login_type" value="formRegister" />
+                          <RaisedButton label="Sign Up" secondary={true} fullWidth={true} onClick = {submit} />
+                        </CardActions>
+                      </Card>
+                    </div>
+                    <div className=".col-md-6 login">
+                      <LoginForm history = {params.history} />
+                    </div>
+
                   </div>
+                </div> );
+              }
 
-                </div>
-              </div> )
-            }
+              function state2props(state, props) {
+                console.log("rerender", state);
+                return { userForm: state.userForm}
+              }
 
-            function state2props(state, props) {
-              console.log("rerender", state);
-              return { userForm: state.userForm}
-            }
-
-            export default connect(state2props)(UserForm);
+              export default connect(state2props)(UserForm);
