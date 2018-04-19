@@ -13,7 +13,7 @@ class Results extends React.Component {
     )
     }
 
-    let jobs = _.map(this.props.jobs, (job) => <Job channel={this.props.channel} key={job.id} job={job} />);
+    let jobs = _.map(this.props.jobs, (job) => <Job channel={this.props.channel} source= "HomeTab" key={job.id} job={job} />);
     return(<div className="container-fluid job-display">
     {jobs.length > 0 ? <div className="container-fluid organizer-padding">Found {jobs.length} results </div> : <div></div>}
     {jobs}

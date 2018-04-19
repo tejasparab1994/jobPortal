@@ -29,10 +29,14 @@ export default function home_init(root, store, channel) {
           });
         channel.push("AFTER_LOG_IN", {user_id: tokenval.dataset.userid})
           .receive("ok", response => {
-            // console.log("gergfgefdgsasdfgbsdfsfgfzxgbfaegse");
+            console.log(response);
             store.dispatch({
               type: 'AFTER_LOG_IN',
-              data: _.map(response.appliedJobs,function(num){ return JSON.parse(num) }),
+              data: {
+                applylater: _.map(response.applyLaterJobs,function(num){ return JSON.parse(num) }),
+                applied: _.map(response.appliedJobs,function(num){ return JSON.parse(num) }),
+              }
+
             });
         })
 

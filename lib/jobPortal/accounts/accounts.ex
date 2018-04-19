@@ -223,6 +223,12 @@ end
       {:error, %Ecto.Changeset{}}
 
   """
+  def find_apply_and_update(job, user_id, status) do
+    user_id = String.to_integer(user_id)
+    result = list_user_apply_later
+    |> Enum.filter(fn(row) -> row.user_id == user_id && row.job == row.job end)
+    update_apply(List.first(result), %{status: status})
+  end
   def update_apply(%Apply{} = apply, attrs) do
     apply
     |> Apply.changeset(attrs)
