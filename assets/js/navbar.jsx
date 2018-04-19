@@ -32,8 +32,8 @@ export default class Navbar extends React.Component {
       <div className="containerd-fluid">
         <AppBar showMenuIconButton={false} titleStyle={{flex: 0}}>
           <div className="container">
-        <AppBar
-          title="Jobs."
+            <AppBar
+              title="Jobs."
           zDepth = {0}
           showMenuIconButton={false}
           iconElementRight = {(this.props.token==null)? this.beforeLogin(): this.afterLogin()}
@@ -50,11 +50,11 @@ export default class Navbar extends React.Component {
 beforeLogin() {
   return(
     <div>
-    {/*<a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5"><IconButton
-      iconClassName="muidocs-icon-custom-github" tooltip="Login With Github"
-      tooltipPosition="bottom-right"
-    /></a>*/}
-    <Link to="/register"><FlatButton {...this.props}  label="Register/Login" /></Link>
+      {/*<a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5"><IconButton
+        iconClassName="muidocs-icon-custom-github" tooltip="Login With Github"
+        tooltipPosition="bottom-right"
+      /></a>*/}
+      <Link to="/register"><FlatButton {...this.props}  label="Register/Login" labelStyle={{ color: 'white', fontSize: '14px' }}/></Link>
     </div>
   )
 }
@@ -69,7 +69,7 @@ afterLogin() {
       targetOrigin={{horizontal: 'right', vertical: 'top'}}
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
-    
+
       <NavLink to="/"><MenuItem primaryText="Home" /></NavLink>
       <NavLink to="/tools"><MenuItem primaryText="Tools" /></NavLink>
       <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
