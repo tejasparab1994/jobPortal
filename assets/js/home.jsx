@@ -69,7 +69,7 @@ class Jobs extends React.Component {
             <Route path="/register" exact={false} render={(history) => <div> <UserForm history = {history}/> </div>} />
             <Route path="/tools" render={(history) => this.props.token ? (<Scorer channel={this.props.channel} />) : (<div>{history.history.push("/")}</div>) }/>
             <Route path="/profile" render={(history) => this.props.token ? ( <Profile channel={this.props.channel} />) : (<div> {history.history.push("/")} </div>)} />
-            <Route name="description" path="/description/:id" render={(id) => <JobDetails id={id.match.params.id} />} />
+            <Route name="description" path="/description/:source/:id" render={(id) => <JobDetails id={id.match.params.id} source={id.match.params.source} />} />
           </div>
     </MuiThemeProvider>
     </Router>

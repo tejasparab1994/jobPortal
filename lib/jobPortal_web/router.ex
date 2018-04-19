@@ -23,7 +23,7 @@ defmodule JobPortalWeb.Router do
     get("/", PageController, :home)
     get("/profile", PageController, :home)
     post("/jobList", PageController, :jobList)
-    get("/description/:id", PageController, :home)
+    get("/description/:source/:id", PageController, :home)
     get "/githubToken", PageController, :githubLogin
     get "/register", PageController, :home
   end

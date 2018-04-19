@@ -67,7 +67,7 @@ class Job extends React.Component {
 
           <CardText expandable={true}>
             <CardActions>
-              <Link id={this.props.job.id} to={"/description/"+this.props.job.id}>DESCRIPTION</Link>
+              <Link to={"/description/"+this.props.source+"/"+this.props.job.id}>DESCRIPTION</Link>
               {ApplyButton}
               {DApplyButton}
               {Applied}
