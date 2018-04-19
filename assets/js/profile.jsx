@@ -11,7 +11,7 @@ import Slider from 'material-ui/Slider';
 export default class Profile extends React.Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <ResumeParser channel={this.props.channel} />
         <Tabs>
           <Tab label ="Applied Jobs">

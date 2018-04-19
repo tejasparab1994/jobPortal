@@ -9,7 +9,7 @@ class Organizer extends React.Component {
     let jobs = _.map(this.props.AppliedJobs, (job) => <Job source= "AppliedTab" channel={this.props.channel} key={job.id} job={job} />);
 
     return(
-      <div className="container-fluid organizer-padding">
+      <div className="container organizer-padding">
         {jobs}
       </div>)
     }

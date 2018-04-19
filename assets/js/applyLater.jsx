@@ -11,7 +11,7 @@ class ApplyLater extends React.Component {
     let jobs = _.map(this.props.ApplyLaterJobs, (job) => <Job source= "ApplyLaterTab" channel={this.props.channel} key={job.id} job={job} />);
 
     return (
-      <div className="container-fluid organizer-padding">
+      <div className="container organizer-padding">
           {jobs}
         </div>
       );
