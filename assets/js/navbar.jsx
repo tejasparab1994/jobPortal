@@ -73,19 +73,22 @@ beforeLogin() {
 afterLogin() {
   let loginname = "Logout " + this.props.token.name
   return(
+    <div style={{position: 'relative'}}>
+    <Link to="/" style={{ position: 'absolute', right:'40%', top: '12%' }}><FlatButton {...this.props}  label="Home" labelStyle={{ color: 'white', fontSize: '16px' }}/></Link>
     <IconMenu
       iconButtonElement={
-        <IconButton><MoreVertIcon /></IconButton>
+        <IconButton><MoreVertIcon color = "white"/></IconButton>
       }
       targetOrigin={{horizontal: 'right', vertical: 'top'}}
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
 
-      <NavLink to="/"><MenuItem primaryText="Home" /></NavLink>
+      
       <NavLink to="/tools"><MenuItem primaryText="Tools" /></NavLink>
       <NavLink to="/profile"><MenuItem primaryText="Profile" /></NavLink>
       <NavLink to="/" onClick = {logout}><MenuItem primaryText={loginname} /></NavLink>
     </IconMenu>
+    </div>
   )
 }
 
