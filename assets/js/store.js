@@ -186,6 +186,17 @@ let empty_searchParams = {
   alldisp: false,
 };
 
+function searchPageMount(state=false, action) {
+  switch (action.type) {
+    case 'MOUNT':
+    return true;
+    case 'UNMOUNT':
+    return false;
+    default:
+    return state
+  }
+}
+
 function searchParams(state = empty_searchParams, action) {
   switch (action.type) {
     case 'UPDATE_SEARCH_PARAMS':
@@ -206,7 +217,7 @@ function searchParams(state = empty_searchParams, action) {
 }
 
 function root_reducer(state0, action) {
-  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm, scorer, loading, isMobile, ApplyLaterJobs, AppliedJobs});
+  let reducer = combineReducers({jobs, searchPageMount, searchParams, users, resume, login, token, userForm, scorer, loading, isMobile, ApplyLaterJobs, AppliedJobs});
   let state1 = reducer(state0, action);
   console.log("ReduxState", state1);
   return deepFreeze(state1);

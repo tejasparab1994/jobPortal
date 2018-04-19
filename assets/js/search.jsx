@@ -14,10 +14,13 @@ class Search extends React.Component {
 
   }
   componentDidMount(){
-    console.log("this is on Mount");
-
+    // console.log("this is on Mount");
+    // this.props.dispatch({type: 'MOUNT'})
     this.params.dispatch({type: 'RESET_FORM'});
+
     window.onscroll = () => {
+      if (this.props.state.searchPageMount) {
+      // console.log(this.props.state.searchPageMount);
       var d = document.documentElement;
       var offset = d.scrollTop + window.innerHeight;
       var height = d.offsetHeight;
@@ -43,10 +46,16 @@ class Search extends React.Component {
           }
         })
       }
+    }
     };
   }
-  nextPage(){
-
+  componentWillMount(){
+    console.log("this is on mount");
+    this.props.dispatch({type: 'MOUNT'})
+  }
+  componentWillUnmount(){
+    console.log("this is on unmount");
+    this.props.dispatch({type: 'UNMOUNT'})
   }
   update(ev){
     let tgt = $(ev.target);

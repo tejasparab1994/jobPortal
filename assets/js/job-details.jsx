@@ -11,6 +11,7 @@ class JobDetails extends React.Component {
   }
 
 render() {
+  // console.log(this.props.job);
   let job = this.props.jobs.filter((el) => {
     return(el.id === this.props.id)
   })
