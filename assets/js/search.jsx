@@ -10,9 +10,12 @@ class Search extends React.Component {
   constructor(props){
     super(props);
     this.params = props;
+    console.log("this is constructor");
 
   }
   componentDidMount(){
+    console.log("this is on Mount");
+
     this.params.dispatch({type: 'RESET_FORM'});
     window.onscroll = () => {
       var d = document.documentElement;

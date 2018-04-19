@@ -170,7 +170,7 @@ defmodule JobPortal.Accounts do
 def list_all_jobs do
   result = list_user_apply_later
 
-  Enum.map(result, fn(job) -> %{"id" => job.user_id, "job" => job.job} end)
+  Enum.map(result, fn(job) -> %{"id" => job.user_id, "job" => job.job, "status" => job.status} end)
 end
   def list_user_apply_later do
     Repo.all(Apply)

@@ -42,6 +42,9 @@ defmodule JobPortalWeb.UserChannel do
   def handle_in("AFTER_LOG_IN", payload, socket) do
     # IO.inspect payload["user_id"]
     applyLaterJobs = JobPortal.Accounts.list_all_jobs()
+    a = List.first(applyLaterJobs)
+    IO.inspect a["status"]
+    applyLaterJobs = JobPortal.Accounts.list_all_jobs()
     |> Enum.filter(&(&1["id"] == String.to_integer(payload["user_id"]) && &1["status"]== "ApplyLater"))
     |> Enum.map(&(&1["job"]))
     appliedJobs = JobPortal.Accounts.list_all_jobs()

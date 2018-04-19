@@ -149,6 +149,8 @@ function ApplyLaterJobs(state=[], action){
     return [action.data, ...state];
     case 'REMOVE_APPLY_LATER':
     return [..._.reject(state, function(job){ return job.id == action.data.id })];
+    case 'MOVE_TO_APPLIED':
+    return [..._.reject(state, function(job){ return job.id == action.data.id })];
     default:
     return state
   }
