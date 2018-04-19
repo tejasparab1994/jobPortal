@@ -154,4 +154,100 @@ defmodule JobPortal.Accounts do
   end
 
 
+
+  alias JobPortal.Accounts.Apply
+
+  @doc """
+  Returns the list of user_apply_later.
+
+  ## Examples
+
+      iex> list_user_apply_later()
+      [%Apply{}, ...]
+
+  """
+  def list_user_apply_later do
+    Repo.all(Apply)
+  end
+
+  @doc """
+  Gets a single apply.
+
+  Raises `Ecto.NoResultsError` if the Apply does not exist.
+
+  ## Examples
+
+      iex> get_apply!(123)
+      %Apply{}
+
+      iex> get_apply!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_apply!(id), do: Repo.get!(Apply, id)
+
+  @doc """
+  Creates a apply.
+
+  ## Examples
+
+      iex> create_apply(%{field: value})
+      {:ok, %Apply{}}
+
+      iex> create_apply(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_apply(attrs \\ %{}) do
+    %Apply{}
+    |> Apply.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a apply.
+
+  ## Examples
+
+      iex> update_apply(apply, %{field: new_value})
+      {:ok, %Apply{}}
+
+      iex> update_apply(apply, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_apply(%Apply{} = apply, attrs) do
+    apply
+    |> Apply.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Apply.
+
+  ## Examples
+
+      iex> delete_apply(apply)
+      {:ok, %Apply{}}
+
+      iex> delete_apply(apply)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_apply(%Apply{} = apply) do
+    Repo.delete(apply)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking apply changes.
+
+  ## Examples
+
+      iex> change_apply(apply)
+      %Ecto.Changeset{source: %Apply{}}
+
+  """
+  def change_apply(%Apply{} = apply) do
+    Apply.changeset(apply, %{})
+  end
 end

@@ -64,4 +64,64 @@ defmodule JobPortal.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
+
+  describe "user_apply_later" do
+    alias JobPortal.Accounts.Apply
+
+    @valid_attrs %{status: "some status"}
+    @update_attrs %{status: "some updated status"}
+    @invalid_attrs %{status: nil}
+
+    def apply_fixture(attrs \\ %{}) do
+      {:ok, apply} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_apply()
+
+      apply
+    end
+
+    test "list_user_apply_later/0 returns all user_apply_later" do
+      apply = apply_fixture()
+      assert Accounts.list_user_apply_later() == [apply]
+    end
+
+    test "get_apply!/1 returns the apply with given id" do
+      apply = apply_fixture()
+      assert Accounts.get_apply!(apply.id) == apply
+    end
+
+    test "create_apply/1 with valid data creates a apply" do
+      assert {:ok, %Apply{} = apply} = Accounts.create_apply(@valid_attrs)
+      assert apply.status == "some status"
+    end
+
+    test "create_apply/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_apply(@invalid_attrs)
+    end
+
+    test "update_apply/2 with valid data updates the apply" do
+      apply = apply_fixture()
+      assert {:ok, apply} = Accounts.update_apply(apply, @update_attrs)
+      assert %Apply{} = apply
+      assert apply.status == "some updated status"
+    end
+
+    test "update_apply/2 with invalid data returns error changeset" do
+      apply = apply_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_apply(apply, @invalid_attrs)
+      assert apply == Accounts.get_apply!(apply.id)
+    end
+
+    test "delete_apply/1 deletes the apply" do
+      apply = apply_fixture()
+      assert {:ok, %Apply{}} = Accounts.delete_apply(apply)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_apply!(apply.id) end
+    end
+
+    test "change_apply/1 returns a apply changeset" do
+      apply = apply_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_apply(apply)
+    end
+  end
 end
