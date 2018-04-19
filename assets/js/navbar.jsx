@@ -34,11 +34,11 @@ export default class Navbar extends React.Component {
           <div className="container">
             <AppBar
               title="Jobs."
-          zDepth = {0}
-          showMenuIconButton={false}
-          iconElementRight = {(this.props.token==null)? this.beforeLogin(): this.afterLogin()}
-        /></div>
-      </AppBar>
+              zDepth = {0}
+              showMenuIconButton={false}
+              iconElementRight = {(this.props.token==null)? this.beforeLogin(): this.afterLogin()}
+            /></div>
+        </AppBar>
         {/* <nav className="navbar navbar-light navbar-expand-lg navbar-blue">
           <a className="navbar-brand text-light">Jobs.</a>
           <UserOptions />
@@ -54,7 +54,7 @@ beforeLogin() {
         iconClassName="muidocs-icon-custom-github" tooltip="Login With Github"
         tooltipPosition="bottom-right"
       /></a>*/}
-      <Link to="/register"><FlatButton {...this.props}  label="Register/Login" labelStyle={{ color: 'white', fontSize: '14px' }}/></Link>
+      <Link to="/register"><FlatButton {...this.props}  label="Register/Login" labelStyle={{ color: 'white', fontSize: '16px' }} /></Link>
     </div>
   )
 }

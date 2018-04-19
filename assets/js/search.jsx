@@ -19,15 +19,12 @@ class Search extends React.Component {
       var offset = d.scrollTop + window.innerHeight;
       var height = d.offsetHeight;
       if (offset === height && this.props.params.alldisp==false) {
-        this.props.dispatch({type: "SET_TRUE"})
         this.props.channel.push("search", {
           title: this.props.params.title,
           location: this.props.params.location,
           page: this.props.params.page + 1,
           jobids: _.map(this.props.state.jobs,  function(num){ return num.id; })
         }).receive("ok", resp=> {
-          this.props.dispatch({type: "SET_FALSE"})
-          window.scrollTo(0, height)
           let data = resp.github.concat(resp.authenticJobs)
 
           if (data.length != 0) {
@@ -89,7 +86,7 @@ class Search extends React.Component {
             name="title"
             className="job-description"
             floatingLabelText="Job Keyword or Title"
-            inputStyle={{ color: 'white', fontSize: '14px' }}
+            inputStyle={{ color: 'white', fontSize: '16px' }}
             floatingLabelStyle ={{color: 'white', fontSize: '16px'}}
             onChange={(ev)=>this.update(ev)}
           />
@@ -97,7 +94,7 @@ class Search extends React.Component {
           <TextField
             name="location"
             floatingLabelText="Location"
-            inputStyle={{ color: 'white', fontSize: '14px' }}
+            inputStyle={{ color: 'white', fontSize: '16px' }}
             floatingLabelStyle ={{color: 'white', fontSize: '16px'}}
             onChange={(ev)=>this.update(ev)}
           />
