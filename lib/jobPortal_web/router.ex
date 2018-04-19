@@ -33,5 +33,6 @@ defmodule JobPortalWeb.Router do
      pipe_through :api
      resources "/users", UserController, except: [:new, :edit]
      post "/token", TokenController, :create
+     resources "/user_apply_later", ApplyController, except: [:new, :edit]
    end
 end
