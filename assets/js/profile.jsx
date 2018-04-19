@@ -15,14 +15,15 @@ export default class Profile extends React.Component {
         <ResumeParser channel={this.props.channel} />
         <Tabs>
           <Tab label ="Applied Jobs">
-            <Organizer />
+            <Organizer channel={this.props.channel}/>
           </Tab>
 
           <Tab label = "Marked for Apply Later">
-            <ApplyLater />
+            <ApplyLater channel={this.props.channel} />
           </Tab>
         </Tabs>
       </div>
     );
   }
 }
+// export default connect((state) => state)(Results);

@@ -1,6 +1,6 @@
 defmodule JobPortalWeb.UserChannel do
   use JobPortalWeb, :channel
-
+  alias JobPortal.Accounts
   def join("users:online", _params, socket) do
 
     {:ok, %{ message: "welcome"}, socket}
@@ -24,6 +24,20 @@ defmodule JobPortalWeb.UserChannel do
 
     response = JobPortal.Scorer.get_score(payload["description"])
     {:reply, {:ok, response}, socket}
+  end
+
+  def handle_in("ADD_APPLY_LATER", payload, socket) do
+    Accounts.create_apply(payload)
+    {:reply, {:ok, %{"applyLater" => "Applied for this job"}}, socket}
+  end
+
+  def handle_in("AFTER_LOG_IN", payload, socket) do
+    IO.inspect payload["user_id"]
+    appliedJobs = JobPortal.Accounts.list_all_jobs()
+    |> Enum.filter(&(&1["id"] == String.to_integer(payload["user_id"])))
+    |> Enum.map(&(&1["job"]))
+    # IO.inspect appliedJobs
+    {:reply, {:ok, %{"appliedJobs" => appliedJobs}}, socket}
   end
 
 end

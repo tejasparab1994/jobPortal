@@ -12,7 +12,7 @@ class Results extends React.Component {
       <img className="img-fluid loading" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"></img>
     )
     }
-    let jobs = _.map(this.props.jobs, (job) => <Job key={job.id} job={job} />);
+    let jobs = _.map(this.props.jobs, (job) => <Job channel={this.props.channel} key={job.id} job={job} />);
     return(<div className="container-fluid">
     {jobs.length > 0 ? <div className="container-fluid organizer-padding">Found {jobs.length} results </div> : <div></div>}
     {jobs}

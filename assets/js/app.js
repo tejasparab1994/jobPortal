@@ -26,10 +26,10 @@ import store from './store';
 function start(){
   let channel = socket.channel("users:online")
   channel.join()
-    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("ok", resp => { home_init(root, store, channel); })
     .receive("error", resp => { console.log("Unable to join", resp) })
   let root = document.getElementById('root');
 
-  home_init(root, store, channel);
+
 }
 $(start)

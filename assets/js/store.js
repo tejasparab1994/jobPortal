@@ -141,6 +141,18 @@ function resume(state=empty_resume, action) {
   }
 }
 
+function ApplyLaterJobs(state=[], action){
+  switch (action.type) {
+    case 'AFTER_LOG_IN':
+    return [...action.data];
+    case 'ADD_APPLY_LATER':
+    return [action.data, ...state];
+    case 'REMOVE_APPLY_LATER':
+    return [..._.reject(state, function(job){ return job.id == action.data.id })];
+    default:
+    return state
+  }
+}
 function loading(state=false, action) {
   switch(action.type) {
     case 'SET_TRUE':
@@ -179,7 +191,7 @@ function searchParams(state = empty_searchParams, action) {
 }
 
 function root_reducer(state0, action) {
-  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm, scorer, loading, isMobile});
+  let reducer = combineReducers({jobs, searchParams, users, resume, login, token, userForm, scorer, loading, isMobile, ApplyLaterJobs});
   let state1 = reducer(state0, action);
   console.log("ReduxState", state1);
   return deepFreeze(state1);

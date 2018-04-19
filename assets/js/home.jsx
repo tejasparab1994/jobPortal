@@ -27,6 +27,15 @@ export default function home_init(root, store, channel) {
             type: 'SET_TOKEN',
             token: resp,
           });
+        channel.push("AFTER_LOG_IN", {user_id: tokenval.dataset.userid})
+          .receive("ok", response => {
+            // console.log("gergfgefdgsasdfgbsdfsfgfzxgbfaegse");
+            store.dispatch({
+              type: 'AFTER_LOG_IN',
+              data: _.map(response.appliedJobs,function(num){ return JSON.parse(num) }),
+            });
+        })
+
     }
   // ReactDOM.render(<Provider store={store}> <App state={store.getState()} /> </Provider>, root);
 }

@@ -5,8 +5,8 @@ defmodule JobPortal.Repo.Migrations.CreateUserApplyLater do
     create table(:user_apply_later) do
       add :status, :string
       add :user_id, references(:users, on_delete: :nothing)
-      add :job, :json
-      
+      add :job, :text
+
       timestamps()
     end
 

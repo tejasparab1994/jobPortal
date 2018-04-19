@@ -67,7 +67,7 @@ defmodule JobPortal.Accounts do
     IO.inspect(newUser)
     {:ok, user} = Repo.insert(newUser)
     {:ok, user}
-    else 
+    else
       {:error, "user already exists"}
     end
   end
@@ -118,20 +118,20 @@ defmodule JobPortal.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
-  
+
   def get_and_auth_user(name, pass, type) do
     user = Repo.one(from u in User, where: u.name == ^name, where: u.login_type == ^type)
     IO.inspect(user)
     Comeonin.Argon2.check_pass(user, pass)
   end
-  
+
 
   def checkifexists(name, type) do
     user = Repo.one(from u in User, select: count("*"), where: u.name == ^name, where: u.login_type == ^type)
     value = true
     value = if(user == 0) do
       false
-    else 
+    else
       true
     end
     value
@@ -142,7 +142,7 @@ defmodule JobPortal.Accounts do
     value = true
     value = if(user == 0) do
       false
-    else 
+    else
       true
     end
     value
@@ -166,6 +166,10 @@ defmodule JobPortal.Accounts do
       [%Apply{}, ...]
 
   """
+def list_all_jobs do
+  result = list_user_apply_later
+  Enum.map(result, fn(job) -> %{"id" => job.user_id, "job" => job.job} end)
+end
   def list_user_apply_later do
     Repo.all(Apply)
   end
@@ -199,6 +203,7 @@ defmodule JobPortal.Accounts do
 
   """
   def create_apply(attrs \\ %{}) do
+    IO.inspect attrs
     %Apply{}
     |> Apply.changeset(attrs)
     |> Repo.insert()
