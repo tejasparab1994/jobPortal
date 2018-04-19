@@ -28,9 +28,13 @@ defmodule JobPortalWeb.UserChannel do
 
   def handle_in("ADD_APPLY_LATER", payload, socket) do
     Accounts.create_apply(payload)
-    {:reply, {:ok, %{"applyLater" => "Applied for this job"}}, socket}
+    {:reply, {:ok, %{"data" => "Suscribed"}}, socket}
   end
-
+  def handle_in("REMOVE_APPLY_LATER", payload, socket) do
+    Accounts.find_apply_and_delete(payload["job"], payload["user_id"])
+    
+    {:reply, {:ok, %{"data" => "Unsuscribed"}}, socket}
+  end
   def handle_in("AFTER_LOG_IN", payload, socket) do
     IO.inspect payload["user_id"]
     appliedJobs = JobPortal.Accounts.list_all_jobs()

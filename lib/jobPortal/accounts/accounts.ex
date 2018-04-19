@@ -7,6 +7,7 @@ defmodule JobPortal.Accounts do
   alias JobPortal.Repo
 
   alias JobPortal.Accounts.User
+  alias JobPortal.Accounts.Apply
 
   @doc """
   Returns the list of users.
@@ -168,6 +169,7 @@ defmodule JobPortal.Accounts do
   """
 def list_all_jobs do
   result = list_user_apply_later
+
   Enum.map(result, fn(job) -> %{"id" => job.user_id, "job" => job.job} end)
 end
   def list_user_apply_later do
@@ -239,6 +241,16 @@ end
       {:error, %Ecto.Changeset{}}
 
   """
+  def find_apply_and_delete(job, user_id) do
+    # row = Repo.delete(from u in Apply, where: u.user_id == ^user_id, where: u.job == ^job)
+    # IO.inspect user_id
+    user_id = String.to_integer(user_id)
+    # row
+    result = list_user_apply_later
+    |> Enum.filter(fn(row) -> row.user_id == user_id && row.job == row.job end)
+    delete_apply(List.first(result))
+
+  end
   def delete_apply(%Apply{} = apply) do
     Repo.delete(apply)
   end

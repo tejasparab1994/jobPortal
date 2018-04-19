@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 class Job extends React.Component {
   applyLater(ev, job){
-    if(true){
+    if(this.props.ApplyLaterJobs){
       this.props.channel.push("ADD_APPLY_LATER", {job: JSON.stringify(job), user_id: this.props.token.user_id, status: "ApplyLater" })
       let action = {
         type: 'ADD_APPLY_LATER',
@@ -17,8 +17,20 @@ class Job extends React.Component {
       this.props.dispatch(action);
     }
   }
+  dapplyLater(ev, job){
+    if(this.props.ApplyLaterJobs){
+      this.props.channel.push("REMOVE_APPLY_LATER", {job: JSON.stringify(job), user_id: this.props.token.user_id})
+      let action = {
+        type: 'REMOVE_APPLY_LATER',
+        data: job,
+      };
+      this.props.dispatch(action);
+    }
+  }
   render() {
     let ApplyButton = this.props.token? <RaisedButton label= "ApplyLater" onClick={(ev)=>{this.applyLater(ev, this.props.job)}}/> : <div></div>;
+    let DApplyButton = this.props.token? <RaisedButton label= "Delete From ApplyLater" onClick={(ev)=>{this.dapplyLater(ev, this.props.job)}}/> : <div></div>;
+
         let companyName = null
         if(this.props.job.company instanceof Object) {
           companyName = this.props.job.company.name
@@ -43,7 +55,7 @@ class Job extends React.Component {
             <CardActions>
               <Link id={this.props.job.id} to={"/description/"+this.props.job.id}>DESCRIPTION</Link>
               {ApplyButton}
-
+              {DApplyButton}
             </CardActions>
             {/*{this.props.job.description.replace(/<\/?[^>]+(>|$)/g,"")}*/}
           </CardText>
