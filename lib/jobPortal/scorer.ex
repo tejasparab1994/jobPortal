@@ -12,7 +12,8 @@ defmodule JobPortal.Scorer do
     |> Enum.uniq()
 
     # Enum.map(skillsRequired, &(IO.inspect &1))
-    yourSkills = JobPortal.Accounts.get_skills(String.to_integer(user_id))
+    user_id = if is_integer(user_id), do: user_id , else: String.to_integer(user_id)
+    yourSkills = JobPortal.Accounts.get_skills(user_id)
     # yourSkills=["java", "python", "elixir", "postgresql", "react", "angular"]
     hits = Enum.filter(skillsRequired, &(&1 in yourSkills))
     score = 0

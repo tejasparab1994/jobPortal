@@ -51,7 +51,9 @@ defmodule JobPortalWeb.UserChannel do
     |> Enum.filter(&(&1["id"] == String.to_integer(payload["user_id"]) && &1["status"]== "Applied"))
     |> Enum.map(&(&1["job"]))
     skills = JobPortal.Accounts.get_skills(String.to_integer(payload["user_id"]))
-
+    IO.inspect "============================================"
+    IO.inspect skills
+    IO.inspect "============================================"
     {:reply, {:ok, %{"applyLaterJobs" => applyLaterJobs, "appliedJobs" => appliedJobs, "skills" => skills}}, socket}
   end
 

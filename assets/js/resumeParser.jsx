@@ -73,7 +73,7 @@ class ResumeParser extends React.Component {
   render() {
     let jobs = _.map(this.props.jobs, (job) => <Job channel={this.props.channel} source= "HomeTab" key={job.id} job={job} />);
 
-    let skills = _.map(this.props.userSkills, (skill)=> <Chip style={chipstyles.chip} className=""> {skill} </Chip>)
+    let skills = _.map(this.props.userSkills, (skill, id)=> <Chip key={id} style={chipstyles.chip} className=""> {skill} </Chip>)
     return (
       <div className="container-fluid organizer-padding">
         <form onSubmit={(ev)=>this.onFormSubmit(ev)}>

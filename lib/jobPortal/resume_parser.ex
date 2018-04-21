@@ -1,7 +1,7 @@
 defmodule JobPortal.ResumeParser do
 
   def parse(file, name, user_id) do
-    user_id = if is_integer(user_id), do: String.to_integer(user_id), else: user_id
+    user_id = if is_integer(user_id), do: user_id , else: String.to_integer(user_id)
     path = "users/#{user_id}.pdf"
     IO.inspect path
     File.write(path, file, [:binary])
