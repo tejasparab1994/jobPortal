@@ -10,51 +10,51 @@ class Search extends React.Component {
   constructor(props){
     super(props);
     this.params = props;
-    console.log("this is constructor");
+    this.handlere=this.handlere.bind(this);
 
+  }
+  handlere(){
+    if (this.props.state.searchPageMount) {
+    var d = document.documentElement;
+    var offset = d.scrollTop + window.innerHeight;
+    var height = d.offsetHeight;
+    if (offset === height && this.props.params.alldisp==false) {
+      this.props.channel.push("search", {
+        title: this.props.params.title,
+        location: this.props.params.location,
+        page: this.props.params.page + 1,
+        jobids: _.map(this.props.state.jobs,  function(num){ return num.id; })
+      }).receive("ok", resp=> {
+        let data = resp.github.concat(resp.authenticJobs)
+
+        if (data.length != 0) {
+          let action = {
+            type: 'UPDATE_JOB_LIST',
+            data: resp.github.concat(resp.authenticJobs),
+          };
+          this.params.dispatch({type: 'INCREMENT_PAGE'})
+          this.params.dispatch(action);
+        }
+        else {
+          this.params.dispatch({type: 'ALL_JOBS_DISPLAYED'})
+        }
+      })
+    }
+  }
   }
   componentDidMount(){
-    // console.log("this is on Mount");
-    // this.props.dispatch({type: 'MOUNT'})
+
     this.params.dispatch({type: 'RESET_FORM'});
+    window.addEventListener("scroll", this.handlere, true)
 
-    window.onscroll = () => {
-      if (this.props.state.searchPageMount) {
-      // console.log(this.props.state.searchPageMount);
-      var d = document.documentElement;
-      var offset = d.scrollTop + window.innerHeight;
-      var height = d.offsetHeight;
-      if (offset === height && this.props.params.alldisp==false) {
-        this.props.channel.push("search", {
-          title: this.props.params.title,
-          location: this.props.params.location,
-          page: this.props.params.page + 1,
-          jobids: _.map(this.props.state.jobs,  function(num){ return num.id; })
-        }).receive("ok", resp=> {
-          let data = resp.github.concat(resp.authenticJobs)
-
-          if (data.length != 0) {
-            let action = {
-              type: 'UPDATE_JOB_LIST',
-              data: resp.github.concat(resp.authenticJobs),
-            };
-            this.params.dispatch({type: 'INCREMENT_PAGE'})
-            this.params.dispatch(action);
-          }
-          else {
-            this.params.dispatch({type: 'ALL_JOBS_DISPLAYED'})
-          }
-        })
-      }
-    }
-    };
   }
   componentWillMount(){
-    console.log("this is on mount");
+
     this.props.dispatch({type: 'MOUNT'})
   }
   componentWillUnmount(){
-    console.log("this is on unmount");
+
+    window.removeEventListener("scroll",this.handlere, true)
     this.props.dispatch({type: 'UNMOUNT'})
   }
   update(ev){
@@ -71,7 +71,6 @@ class Search extends React.Component {
   }
 
   submit(ev){
-    //console.log("searchParams", this.props);
     this.props.dispatch({type: "SET_TRUE"})
     this.params.dispatch({type: 'RESET_PAGE'});
     this.params.channel.push("search", {
@@ -80,7 +79,6 @@ class Search extends React.Component {
       page: 0,
       jobids:[]
     }).receive("ok", resp=> {
-      //console.log(resp.github.concat(resp.authenticJobs));
       this.props.dispatch({type: "SET_FALSE"})
       let action = {
         type: 'ADD_JOB_LIST',

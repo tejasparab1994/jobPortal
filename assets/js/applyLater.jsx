@@ -6,7 +6,6 @@ import Job from './job';
 
 
 class ApplyLater extends React.Component {
-  // console.log(this.props.ApplyLaterJobs);
   render(){
     let jobs = _.map(this.props.ApplyLaterJobs, (job) => <Job source= "ApplyLaterTab" channel={this.props.channel} key={job.id} job={job} />);
 

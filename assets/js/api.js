@@ -13,7 +13,7 @@ request_users() {
       },
       error: (error) => {
         console.log(error)
-       
+
       }
     });
   }
@@ -23,7 +23,7 @@ $.ajax("/api/v1/githubToken", {
   dataType: "json",
   contentType: "application/json; charset=UTF-8",
   success: (resp) => {
-    console.log(resp)
+
     store.dispatch({
       type: 'SET_TOKEN',
       token: resp,
@@ -52,7 +52,7 @@ $.ajax("/api/v1/githubToken", {
         location.href = "/"
       },
       error: function(xhr) {
-       console.log("some error")
+
         alert(xhr.responseJSON)
       }
     });
@@ -101,11 +101,11 @@ $.ajax("/api/v1/githubToken", {
         this.request_tasks()
        alert("task updated successfully")
        history.push('/')
-       
+
       },
     });
   }
-   
+
 }
 
 export default new TheServer();
