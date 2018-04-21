@@ -35,6 +35,7 @@ export default function home_init(root, store, channel) {
               data: {
                 applylater: _.map(response.applyLaterJobs,function(num){ return JSON.parse(num) }),
                 applied: _.map(response.appliedJobs,function(num){ return JSON.parse(num) }),
+                skills: response.skills
               }
 
             });
@@ -69,7 +70,7 @@ class Jobs extends React.Component {
             <Route path="/register" exact={false} render={(history) => <div> <UserForm history = {history}/> </div>} />
             <Route path="/tools" render={(history) => this.props.token ? (<Scorer channel={this.props.channel} />) : (<div>{history.history.push("/")}</div>) }/>
             <Route path="/profile" render={(history) => this.props.token ? ( <Profile channel={this.props.channel} />) : (<div> {history.history.push("/")} </div>)} />
-            <Route name="description" path="/description/:source/:id" render={(id) => <JobDetails id={id.match.params.id} source={id.match.params.source} />} />
+            <Route name="description" path="/description/:source/:id" render={(id) => <JobDetails id={id.match.params.id} source={id.match.params.source} channel={this.props.channel} />} />
           </div>
     </MuiThemeProvider>
     </Router>

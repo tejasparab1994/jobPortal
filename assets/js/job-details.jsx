@@ -8,12 +8,28 @@ import {Redirect} from 'react-router-dom'
 class JobDetails extends React.Component {
 
   componentDidMount() {
+    let jobs = null
+
+      if (this.props.source === "HomeTab"){
+      jobs = this.props.jobs.filter((el) => {
+        return(el.id === this.props.id)
+      })}
+      if (this.props.source === "AppliedTab"){
+      jobs = this.props.AppliedJobs.filter((el) => {
+        return(el.id === this.props.id)
+      })}
+      if (this.props.source === "ApplyLaterTab"){
+      jobs = this.props.ApplyLaterJobs.filter((el) => {
+        return(el.id === this.props.id)
+      })}
+      let job = jobs[0]
+      if(this.props.token){
     this.props.channel.push("GET_SCORE_FROM_DESCRIPTION", {
       description: job.description.replace(/<\/?[^>]+(>|$)/g,""),
       user_id: this.props.token.user_id
     }).receive("ok",(resp) => {
-      console.log("THS SCORE IS", resp.score)
-    })
+      this.props.dispatch({type:'JOB_DETAIL_SCORE', score: resp.score})
+    })}
   }
 
   redirect(url) {
@@ -73,7 +89,7 @@ class JobDetails extends React.Component {
             {job.description.replace(/<\/?[^>]+(>|$)/g,"")}
             <div className="organizer-padding"></div>
             <RaisedButton label="APPLY" primary={true} onClick={() => window.open(job.url, "_blank")} />
-            <span className="float-right"><h5>Your Profile Matches 100% with this job</h5></span>
+            <span className="float-right"><h5>Your Profile Matches {this.props.jobDetailScore}% with this job</h5></span>
           </CardText>
         </Card>
       </div>)

@@ -26,6 +26,6 @@ defmodule JobPortal.ResumeParser do
     skillstore = Enum.join(response, "*")
     JobPortal.Accounts.get_user!(String.to_integer(user_id)) |>
     JobPortal.Accounts.update_user(%{skills: skillstore, binresume: file})
-
+    response
   end
 end

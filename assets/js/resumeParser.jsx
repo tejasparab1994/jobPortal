@@ -21,6 +21,15 @@ const styles = {
     opacity: 0,
   },
 };
+const chipstyles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+};
 
 class ResumeParser extends React.Component {
 
@@ -52,14 +61,18 @@ class ResumeParser extends React.Component {
       reader.readAsDataURL(this.props.resume.file)
       reader.addEventListener("load", ()=> {
         let payload = {binary: reader.result.split(",", 2)[1], filename: filename, user_id: this.props.token.user_id}
-        console.log(payload);
-        this.props.channel.push("uploadfile", payload)
+
+        this.props.channel.push("uploadfile", payload).receive("ok", (resp)=> this.props.dispatch({ type: 'AFTER_UPDATE_RESUME',
+        data: resp.skills,}))
       }, false);
     }
 
   }
 
   render() {
+    let jobs = _.map(this.props.jobs, (job) => <Job channel={this.props.channel} source= "HomeTab" key={job.id} job={job} />);
+
+    let skills = _.map(this.props.userSkills, (skill)=> <Chip style={chipstyles.chip} className=""> {skill} </Chip>)
     return (
       <div className="container-fluid organizer-padding">
         <form onSubmit={(ev)=>this.onFormSubmit(ev)}>
@@ -76,7 +89,7 @@ class ResumeParser extends React.Component {
             {this.props.resume.name != "" ? <Chip className="ml-1 mr-1" onRequestDelete={(ev)=>this.clear(ev)}> {this.props.resume.name} </Chip> : <div></div>}
             {this.props.resume.name != "" ? <RaisedButton className="mt-1" label="Upload" type="submit" className="button-submit" primary={true}/> :<div></div>}
           </div>
-          <div className="gap"></div>
+          <div style={chipstyles.wrapper} className="gap">{skills}</div>
 
         </form>
       </div>

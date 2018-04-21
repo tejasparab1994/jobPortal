@@ -17,8 +17,8 @@ defmodule JobPortalWeb.UserChannel do
     payload1 = payload
     |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
     payload2 = Map.put(payload1, :binary, Base.decode64!(payload1.binary))
-    JobPortal.ResumeParser.parse(payload2.binary, payload2.filename, payload2.user_id)
-    {:reply, {:ok, payload}, socket}
+    skills = JobPortal.ResumeParser.parse(payload2.binary, payload2.filename, payload2.user_id)
+    {:reply, {:ok, %{"skills" => skills}}, socket}
   end
 
   def handle_in("GET_SCORE_FROM_DESCRIPTION", payload, socket) do
@@ -50,8 +50,9 @@ defmodule JobPortalWeb.UserChannel do
     appliedJobs = JobPortal.Accounts.list_all_jobs()
     |> Enum.filter(&(&1["id"] == String.to_integer(payload["user_id"]) && &1["status"]== "Applied"))
     |> Enum.map(&(&1["job"]))
+    skills = JobPortal.Accounts.get_skills(String.to_integer(payload["user_id"]))
 
-    {:reply, {:ok, %{"applyLaterJobs" => applyLaterJobs, "appliedJobs" => appliedJobs}}, socket}
+    {:reply, {:ok, %{"applyLaterJobs" => applyLaterJobs, "appliedJobs" => appliedJobs, "skills" => skills}}, socket}
   end
 
 end

@@ -216,8 +216,26 @@ function searchParams(state = empty_searchParams, action) {
   }
 }
 
+function jobDetailScore(state=0, action) {
+  switch(action.type) {
+    case 'JOB_DETAIL_SCORE':
+      return action.score;
+    default:
+    return state
+}
+}
+function userSkills(state=[], action) {
+    switch(action.type) {
+      case 'AFTER_LOG_IN':
+        return [...action.data.skills];
+      case 'AFTER_UPDATE_RESUME':
+        return [...action.data];
+      default:
+      return state
+    }
+}
 function root_reducer(state0, action) {
-  let reducer = combineReducers({jobs, searchPageMount, searchParams, users, resume, login, token, userForm, scorer, loading, isMobile, ApplyLaterJobs, AppliedJobs});
+  let reducer = combineReducers({jobs, searchPageMount, searchParams, users, userSkills , resume, login, token, userForm, scorer, loading, jobDetailScore, isMobile, ApplyLaterJobs, AppliedJobs});
   let state1 = reducer(state0, action);
   console.log("ReduxState", state1);
   return deepFreeze(state1);
