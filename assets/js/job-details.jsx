@@ -89,7 +89,7 @@ class JobDetails extends React.Component {
             {job.description.replace(/<\/?[^>]+(>|$)/g,"")}
             <div className="organizer-padding"></div>
             <RaisedButton label="APPLY" primary={true} onClick={() => window.open(job.url, "_blank")} />
-            <span className="float-right"><h5>Your Profile Matches {this.props.jobDetailScore}% with this job</h5></span>
+            {this.props.token ? <span className="float-right"><h5>Your Profile Matches {this.props.jobDetailScore}% with this job</h5></span> : <span></span>}
           </CardText>
         </Card>
       </div>)
