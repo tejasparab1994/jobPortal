@@ -37,6 +37,10 @@ defmodule JobPortal.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+  def get_skills(id) do
+    user = get_user!(id)
+    user.skills |> String.split("*")
+   end
 
   @doc """
   Creates a user.
@@ -85,6 +89,9 @@ defmodule JobPortal.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
+  # def update_resume(user_id, attrs) do
+  #
+  # end
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)

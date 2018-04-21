@@ -6,6 +6,7 @@ defmodule JobPortal.Accounts.Apply do
   schema "user_apply_later" do
     field :status, :string
     field :job, :string
+
     belongs_to :user, JobPortal.Accounts.User, foreign_key: :user_id
     timestamps()
   end

@@ -1,6 +1,6 @@
 defmodule JobPortal.Scorer do
 
-  def get_score(description) do
+  def get_score(description, user_id) do
     {:ok, file} = File.read("skills.txt")
     skills = file |> String.downcase() |> String.split("\n")
     skillsRequired= String.replace(description, "\n", " ")
@@ -12,8 +12,8 @@ defmodule JobPortal.Scorer do
     |> Enum.uniq()
 
     # Enum.map(skillsRequired, &(IO.inspect &1))
-
-    yourSkills=["java", "python", "elixir", "postgresql", "react", "angular"]
+    yourSkills = JobPortal.Accounts.get_skills(String.to_integer(user_id))
+    # yourSkills=["java", "python", "elixir", "postgresql", "react", "angular"]
     hits = Enum.filter(skillsRequired, &(&1 in yourSkills))
     score = 0
     if length(skillsRequired) != 0 do

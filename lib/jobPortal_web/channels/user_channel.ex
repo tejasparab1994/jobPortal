@@ -12,17 +12,18 @@ defmodule JobPortalWeb.UserChannel do
     {:reply, {:ok, data}, socket}
   end
 
+
   def handle_in("uploadfile", payload, socket) do
     payload1 = payload
     |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
     payload2 = Map.put(payload1, :binary, Base.decode64!(payload1.binary))
-    JobPortal.ResumeParser.parse(payload2.binary)
+    JobPortal.ResumeParser.parse(payload2.binary, payload2.filename, payload2.user_id)
     {:reply, {:ok, payload}, socket}
   end
 
   def handle_in("GET_SCORE_FROM_DESCRIPTION", payload, socket) do
 
-    response = JobPortal.Scorer.get_score(payload["description"])
+    response = JobPortal.Scorer.get_score(payload["description"], payload["user_id"])
     {:reply, {:ok, response}, socket}
   end
 
@@ -43,15 +44,12 @@ defmodule JobPortalWeb.UserChannel do
     # IO.inspect payload["user_id"]
     applyLaterJobs = JobPortal.Accounts.list_all_jobs()
     a = List.first(applyLaterJobs)
-    IO.inspect a["status"]
     applyLaterJobs = JobPortal.Accounts.list_all_jobs()
     |> Enum.filter(&(&1["id"] == String.to_integer(payload["user_id"]) && &1["status"]== "ApplyLater"))
     |> Enum.map(&(&1["job"]))
     appliedJobs = JobPortal.Accounts.list_all_jobs()
     |> Enum.filter(&(&1["id"] == String.to_integer(payload["user_id"]) && &1["status"]== "Applied"))
     |> Enum.map(&(&1["job"]))
-    IO.inspect appliedJobs
-    IO.inspect applyLaterJobs
 
     {:reply, {:ok, %{"applyLaterJobs" => applyLaterJobs, "appliedJobs" => appliedJobs}}, socket}
   end

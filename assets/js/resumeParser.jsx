@@ -51,7 +51,7 @@ class ResumeParser extends React.Component {
       let filename = this.props.resume.file != null ? this.props.resume.name : "";
       reader.readAsDataURL(this.props.resume.file)
       reader.addEventListener("load", ()=> {
-        let payload = {binary: reader.result.split(",", 2)[1], filename: filename}
+        let payload = {binary: reader.result.split(",", 2)[1], filename: filename, user_id: this.props.token.user_id}
         console.log(payload);
         this.props.channel.push("uploadfile", payload)
       }, false);

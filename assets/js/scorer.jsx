@@ -27,7 +27,7 @@ class Scorer extends React.Component {
   }
 
   onSubmit(ev){
-    let payload = {description: this.props.scorer.description}
+    let payload = {description: this.props.scorer.description, user_id: this.props.state.token.user_id}
     this.props.channel.push("GET_SCORE_FROM_DESCRIPTION", payload)
     .receive("ok", resp => this.onReceive(resp.score, resp.skillsRequired, resp.skillsPresent))
   }
@@ -94,7 +94,7 @@ class Scorer extends React.Component {
 
 function state2props(state) {
 
-  return { scorer: state.scorer};
+  return { scorer: state.scorer, state: state};
 }
 
 export default connect(state2props)(Scorer);
