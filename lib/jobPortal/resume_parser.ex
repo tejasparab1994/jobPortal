@@ -1,8 +1,11 @@
 defmodule JobPortal.ResumeParser do
 
   def parse(file, name, user_id) do
-    File.write("assignment1.pdf", file, [:binary])
-    response = HTTPoison.post!("http://api2.pdfextractoronline.com:8089/tab2ex2/api?tab2exkey=608.3FEB7C1B3F277FB8&fileName=assignment1.pdf&recognitionMethod=auto&outputFormat=TXT", {:multipart, [{:file, "assignment1.pdf"}]})
+    user_id = if is_integer(user_id), do: String.to_integer(user_id), else: user_id
+    path = "users/#{user_id}.pdf"
+    IO.inspect path
+    File.write(path, file, [:binary])
+    response = HTTPoison.post!("http://api2.pdfextractoronline.com:8089/tab2ex2/api?tab2exkey=608.3FEB7C1B3F277FB8&fileName=a.pdf&recognitionMethod=auto&outputFormat=TXT", {:multipart, [{:file, path}]})
     response = response.body
 
     # url = "https://api.ocr.space/parse/image"
@@ -24,7 +27,7 @@ defmodule JobPortal.ResumeParser do
     |> Enum.uniq()
     |> Enum.map(&(IO.inspect &1))
     skillstore = Enum.join(response, "*")
-    user_id = if is_integer(user_id), do: user_id, else: String.to_integer(user_id)
+
     JobPortal.Accounts.get_user!(user_id) |>
     JobPortal.Accounts.update_user(%{skills: skillstore, binresume: file})
     response

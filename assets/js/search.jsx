@@ -17,7 +17,6 @@ class Search extends React.Component {
     // console.log("this is on Mount");
     // this.props.dispatch({type: 'MOUNT'})
     this.params.dispatch({type: 'RESET_FORM'});
-
     window.onscroll = () => {
       if (this.props.state.searchPageMount) {
       // console.log(this.props.state.searchPageMount);
@@ -48,9 +47,9 @@ class Search extends React.Component {
       }
     }
     };
-  }
+}
   componentWillMount(){
-    console.log("this is on mount");
+    console.log("constructorname",this.constructor.name === "Search");
     this.props.dispatch({type: 'MOUNT'})
   }
   componentWillUnmount(){
