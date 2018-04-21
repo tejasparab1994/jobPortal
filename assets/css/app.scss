@@ -14,11 +14,24 @@ body {
   background-color: #ECECEC;
 }
 
+.description-padding {
+  margin-left: 1%;
+}
+
+.description-height {
+  margin-top: 1%;
+}
+
+.float-right {
+  float: right;
+}
+
 // Attribution for background image: http://www.westdale.com/home%20background/Westdale%20Background%20Image3.jpg
 .search-input {
   top: 25%;
   padding: 7%;
   width: 100%;
+  max-width: 100%;
   text-align: center;
   background-image: linear-gradient(#f9f9f9, #ddd);
   background:url(http://www.westdale.com/home%20background/Westdale%20Background%20Image3.jpg) no-repeat center center scroll;

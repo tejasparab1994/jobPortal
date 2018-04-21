@@ -25,7 +25,7 @@ class Job extends React.Component {
         type: 'MOVE_TO_APPLIED',
         data: job,
       };
-      
+
       this.props.dispatch(action);
     }
   }
@@ -40,17 +40,17 @@ class Job extends React.Component {
     }
   }
   render() {
-    
-    
+
+
     let appliedLaterArray = this.props.ApplyLaterJobs
     let appliedURLArray = [];
     for(let i=0; i < appliedLaterArray.length; i++) {
       appliedURLArray.push(appliedLaterArray[i].url)
     }
     let applyraised = appliedURLArray.includes(this.props.job.url)
-   l
-    let ApplyButton = this.props.token? <RaisedButton label= "ApplyLater" disabled = {applyraised} onClick={(ev)=>{this.applyLater(ev, this.props.job)}}/> : <div></div>;
-    let DApplyButton = this.props.token && applyraised == true ? <RaisedButton label= "Delete From ApplyLater" onClick={(ev)=>{this.dapplyLater(ev, this.props.job)}}/> : <div></div>;
+
+    let ApplyButton = this.props.token? <RaisedButton label= "Apply Later" disabled = {applyraised} onClick={(ev)=>{this.applyLater(ev, this.props.job)}}/> : <div></div>;
+    let DApplyButton = this.props.token && applyraised == true ? <RaisedButton label= "Remove From Apply Later" onClick={(ev)=>{this.dapplyLater(ev, this.props.job)}}/> : <div></div>;
     let Applied = (this.props.token && this.props.source==="ApplyLaterTab" )? <RaisedButton label= "Mark as Applied" onClick={(ev)=>{this.AddToApplied(ev, this.props.job)}}/> : <div></div>;
         let companyName = null
         if(this.props.job.company instanceof Object) {
@@ -60,7 +60,8 @@ class Job extends React.Component {
           companyName = this.props.job.company
         }
         let default_image = "https://careerforum.net/assets/company-default-96f4ffcb9967f09089dae7656368a5ec5489cd028f5236192e21095006cc86e1.png"
-
+        let description = this.props.job.description.replace(/<\/?[^>]+(>|$)/g,"")
+        let newd = description.split(/\s+/).slice(0,30).join(" ")
         return(
           <div className="container-fluid job-display">
 
@@ -77,10 +78,17 @@ class Job extends React.Component {
 
           <CardText expandable={true}>
             <CardActions>
-              <Link to={"/description/"+this.props.source+"/"+this.props.job.id}>DESCRIPTION</Link>
-              {ApplyButton}
-              {DApplyButton}
+              <div>
+                {newd}
+              <span className="description-padding">
+              <Link to={"/description/"+this.props.source+"/"+this.props.job.id}>more description</Link>
+              </span>
+              <div className="description-height"></div>
+              <div>
+              {this.props.token && applyraised == true ? DApplyButton : ApplyButton}
+            </div>
               {Applied}
+          </div>
             </CardActions>
             {/*{this.props.job.description.replace(/<\/?[^>]+(>|$)/g,"")}*/}
           </CardText>

@@ -7,6 +7,15 @@ import {Redirect} from 'react-router-dom'
 
 class JobDetails extends React.Component {
 
+  componentDidMount() {
+    this.props.channel.push("GET_SCORE_FROM_DESCRIPTION", {
+      description: job.description.replace(/<\/?[^>]+(>|$)/g,""),
+      user_id: this.props.token.user_id
+    }).receive("ok",(resp) => {
+      console.log("THS SCORE IS", resp.score)
+    })
+  }
+
   redirect(url) {
     return <Redirect push to={url} />
   }
@@ -64,6 +73,7 @@ class JobDetails extends React.Component {
             {job.description.replace(/<\/?[^>]+(>|$)/g,"")}
             <div className="organizer-padding"></div>
             <RaisedButton label="APPLY" primary={true} onClick={() => window.open(job.url, "_blank")} />
+            <span className="float-right"><h5>Your Profile Matches 100% with this job</h5></span>
           </CardText>
         </Card>
       </div>)
