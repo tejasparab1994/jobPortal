@@ -24,7 +24,8 @@ defmodule JobPortal.ResumeParser do
     |> Enum.uniq()
     |> Enum.map(&(IO.inspect &1))
     skillstore = Enum.join(response, "*")
-    JobPortal.Accounts.get_user!(String.to_integer(user_id)) |>
+    user_id = if is_integer(user_id), do: user_id, else: String.to_integer(user_id)
+    JobPortal.Accounts.get_user!(user_id) |>
     JobPortal.Accounts.update_user(%{skills: skillstore, binresume: file})
     response
   end
