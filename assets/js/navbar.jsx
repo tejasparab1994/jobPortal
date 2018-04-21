@@ -117,7 +117,7 @@ beforeLogin() {
         tooltipPosition="bottom-right"
       /></a>*/}
       <Link to="/register">
-        <FlatButton  className="register" {...this.props} icon = {<ActionAccountCircle style={styles.registerIcon}/>} iconStyle/>
+        <FlatButton  className="register" {...this.props} icon = {<ActionAccountCircle style={styles.registerIcon}/>} />
       </Link>
 
     </div>
