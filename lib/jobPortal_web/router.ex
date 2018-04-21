@@ -16,13 +16,10 @@ defmodule JobPortalWeb.Router do
   scope "/", JobPortalWeb do
     # Use the default browser stack
     pipe_through(:browser)
-    post("/fileparse", PageController, :uploadfile)
+
     get("/tools", PageController, :home)
-    get("/fileparse", PageController, :uploadfile)
-    get("/index", PageController, :index)
     get("/", PageController, :home)
     get("/profile", PageController, :home)
-    post("/jobList", PageController, :jobList)
     get("/description/:source/:id", PageController, :home)
     get "/githubToken", PageController, :githubLogin
     get "/register", PageController, :home
