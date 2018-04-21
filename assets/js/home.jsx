@@ -17,7 +17,7 @@ export default function home_init(root, store, channel) {
   ReactDOM.render(<Provider store={store}><App state={store.getState()} channel={channel} /></Provider>, root);
   let tokenval = document.getElementById("token-carrier")
     let user_id = document.getElementById("user-id")
-    if(tokenval.dataset.token != null) {
+    if(tokenval != null) {
         let resp = {
             user_id: tokenval.dataset.userid,
             token: tokenval.dataset.token,
@@ -63,6 +63,7 @@ class Jobs extends React.Component {
     return(
       <Router>
         <MuiThemeProvider muiTheme={Mui}>
+          <div>
           <Navbar channel={this.props.channel} token = {this.props.token}/>
           <div className= "containerd-fluid">
             <Route path="/" exact={true} render={() => <div><Search channel={this.props.channel} /><div className="container"><Results jobs={this.props.state.jobs} channel={this.props.channel}/></div></div>} />
@@ -72,6 +73,7 @@ class Jobs extends React.Component {
             <Route path="/profile" render={(history) => this.props.token ? ( <Profile channel={this.props.channel} />) : (<div> {history.history.push("/")} </div>)} />
             <Route name="description" path="/description/:source/:id" render={(id) => <JobDetails id={id.match.params.id} source={id.match.params.source} channel={this.props.channel} />} />
           </div>
+        </div>
     </MuiThemeProvider>
     </Router>
     )

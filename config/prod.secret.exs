@@ -9,12 +9,12 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 config :jobPortal, JobPortalWeb.Endpoint,
-  secret_key_base: "S9UEUL+KjeTsGtW79s8TGEx8VaRLaLY+6YN/10XUjQDeUdXnWf1uiALpqSpJqk2m"
+  secret_key_base: "PvSxCGddlqRbea0dvAnXF7ANmJbuhQZwBnl5pPnNsI0t3XLwvqriiggxdKeEXJ04"
 
 # Configure your database
-config :jobPortal, JobPortalWeb.Repo,
+config :jobPortal, JobPortal.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "jobPortal",
   password: "someRandomNumber123",
-  database: "jobPortal_prod",
+  database: "jobportal_prod",
   pool_size: 15
