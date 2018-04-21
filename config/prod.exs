@@ -56,7 +56,7 @@ config :logger, level: :info
 # Alternatively, you can configure exactly which server to
 # start per endpoint:
 #
-#     config :jobPortal, JobPortalWeb.Endpoint, server: true
+   config :jobPortal, JobPortalWeb.Endpoint, server: true
 #
 
 # Finally import the config/prod.secret.exs

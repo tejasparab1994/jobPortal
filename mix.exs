@@ -41,10 +41,11 @@ defmodule JobPortal.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:httpoison, "~> 0.13"}, 
+      {:httpoison, "~> 0.13"},
       {:poison, "~> 3.1"},
       {:comeonin, "~> 4.0"},
-      {:argon2_elixir, "~> 1.2"}
+      {:argon2_elixir, "~> 1.2"},
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 
