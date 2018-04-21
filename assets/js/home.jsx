@@ -29,7 +29,6 @@ export default function home_init(root, store, channel) {
           });
         channel.push("AFTER_LOG_IN", {user_id: tokenval.dataset.userid})
           .receive("ok", response => {
-            console.log(response);
             store.dispatch({
               type: 'AFTER_LOG_IN',
               data: {
@@ -49,7 +48,6 @@ class Jobs extends React.Component {
   constructor(props){
     super(props);
     this.channel = props.channel
-    console.log(props);
   }
 
   componentDidMount() {

@@ -72,7 +72,6 @@ let empty_user_form = {
 function token(state = null, action) {
   switch (action.type) {
     case 'SET_TOKEN':
-    console.log(action.token)
     return action.token;
     case 'LOGOUT' :
     return null;

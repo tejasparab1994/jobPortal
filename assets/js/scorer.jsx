@@ -15,7 +15,6 @@ class Scorer extends React.Component {
   onChange(ev) {
     let tgt = $(ev.target);
     let value = ev.target.value;
-    console.log(value);
     let data = {};
     data[tgt.attr('name')] = value;
 
@@ -66,7 +65,6 @@ class Scorer extends React.Component {
     return comps
   }
   render() {
-    console.log("Scorer", this.props);
     return(<div className="container">
     <div className="scorer">
       <p>Paste the text of the job description in the box below. Click on MATCH! and find out how closely your resume matches to this job description</p>

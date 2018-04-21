@@ -55,7 +55,6 @@ class JobDetails extends React.Component {
   }
 
   render() {
-    console.log(this.props.source);
     let jobs = null
 
       if (this.props.source === "HomeTab"){
@@ -71,7 +70,6 @@ class JobDetails extends React.Component {
         return(el.id === this.props.id)
       })}
       let job = jobs[0]
-      console.log("joblength???", jobs.length)
 
       if (jobs.length === 0) {
         return <Redirect to="/" />

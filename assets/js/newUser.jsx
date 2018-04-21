@@ -29,7 +29,6 @@ const GitHubIcon = (props) => (
 
     function create_token(ev) {
       api.submit_login(props.login, props.history );
-      console.log(props.login);
     }
 
     return (
@@ -77,18 +76,14 @@ const GitHubIcon = (props) => (
                 type: 'UPDATE_USER_FORM',
                 data: data,
               };
-              console.log(action);
               params.dispatch(action);
             }
 
             function submit(ev) {
-              console.log("Should create User.");
-              console.log(params.userForm);
               validateInput()
             }
 
             function validateInput() {
-              console.log("entered validate input")
               if( /(.+)@(.+){2,}\.(.+){2,}/.test(params.userForm.email) ) {
                 if(params.userForm.name.length == 0) {
                   alert('name is empty')
@@ -148,7 +143,6 @@ const GitHubIcon = (props) => (
               }
 
               function state2props(state, props) {
-                console.log("rerender", state);
                 return { userForm: state.userForm}
               }
 
