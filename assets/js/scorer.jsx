@@ -49,7 +49,7 @@ class Scorer extends React.Component {
 
     if (this.props.scorer.score.length != 0){
       comps =<div>
-        <h5 className="display2">Your score is {this.props.scorer.score}</h5>
+        <h5 className="display2">Your score is {this.props.scorer.score.toFixed(2)}%</h5>
         <div className="organizer-padding"></div>
         <div className="skills-compare container">
         <div className="left">

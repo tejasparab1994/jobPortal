@@ -63,8 +63,11 @@ class ResumeParser extends React.Component {
       reader.addEventListener("load", ()=> {
         let payload = {binary: reader.result.split(",", 2)[1], filename: filename, user_id: this.props.token.user_id}
 
-        this.props.channel.push("uploadfile", payload).receive("ok", (resp)=> this.props.dispatch({ type: 'AFTER_UPDATE_RESUME',
-        data: resp.skills,}))
+        this.props.channel.push("uploadfile", payload).receive("ok", (resp)=>{
+
+        this.props.dispatch({ type: 'AFTER_UPDATE_RESUME', data: resp.skills})
+        alert("successfully uploaded.")
+      })
       }, false);
     }
 
@@ -85,12 +88,15 @@ class ResumeParser extends React.Component {
               style={styles.uploadButton}
               containerElement="label"
               secondary={true}>
-              <input id="fileform" type="file" name="file" onChange={(ev)=>this.update(ev)} style={styles.uploadInput} />
+              <input id="fileform" type="file" name="file" accept=".pdf" onChange={(ev)=>this.update(ev)} style={styles.uploadInput} />
             </RaisedButton>
-            {this.props.resume.name != "" ? <Chip className="ml-1 mr-1" onRequestDelete={(ev)=>this.clear(ev)}> {this.props.resume.name} </Chip> : <div></div>}
+            {this.props.resume.name != "" ? <Chip className="ml-1 mr-1" onRequestDelete={(ev)=>this.clear(ev)}> {this.props.resume.name} </Chip> : <div><Chip className="ml-1 mr-1" > Only PDF files are allowed </Chip></div>}
             {this.props.resume.name != "" ? <RaisedButton className="mt-1" label="Upload" type="submit" className="button-submit" primary={true}/> :<div></div>}
           </div>
-          <div style={chipstyles.wrapper} className="gap">{skills}</div>
+           <div className="gap">
+          <h3>Your Skills are:</h3>
+          <div style={chipstyles.wrapper}>{skills}</div>
+          </div>
 
         </form>
       </div>

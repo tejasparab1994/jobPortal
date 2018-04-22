@@ -6,6 +6,7 @@ defmodule JobPortal.Scorer do
     skillsRequired= String.replace(description, "\n", " ")
     |> String.replace("\r", " ")
     |> String.replace(",", " ")
+    |> String.downcase()
     |> String.split(" ")
     |> Enum.filter(&(&1!=""))
     |> Enum.filter(&(String.downcase(&1) in skills))

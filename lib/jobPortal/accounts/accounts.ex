@@ -39,7 +39,7 @@ defmodule JobPortal.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
   def get_skills(id) do
     user = get_user!(id)
-    user.skills |> String.split("*")
+    user.skills |> String.downcase() |> String.split("*")
    end
 
   @doc """
