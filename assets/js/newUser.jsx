@@ -28,7 +28,7 @@ const GitHubIcon = (props) => (
     }
 
     function create_token(ev) {
-      api.submit_login(props.login, props.history );
+      api.submit_login(props.login, props.history, props.channel );
     }
 
     return (
@@ -135,7 +135,7 @@ const GitHubIcon = (props) => (
                       </Card>
                     </div>
                     <div className=".col-md-6 login">
-                      <LoginForm history = {params.history} />
+                      <LoginForm channel = {params.channel} history = {params.history} />
                     </div>
 
                   </div>

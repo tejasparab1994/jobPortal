@@ -7,6 +7,19 @@ import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class Job extends React.Component {
+
+  dapplied(ev, job){
+    if(true){
+      this.props.channel.push("REMOVE_APPLIED", {job: JSON.stringify(job), user_id: this.props.token.user_id, status: "Applied" })
+      let action = {
+        type: 'REMOVE_APPLIED',
+        data: job,
+      };
+      this.props.dispatch(action);
+
+    }
+  }
+
   applyLater(ev, job){
     if(true){
       this.props.channel.push("ADD_APPLY_LATER", {job: JSON.stringify(job), user_id: this.props.token.user_id, status: "ApplyLater" })
@@ -49,9 +62,11 @@ class Job extends React.Component {
     }
     let applyraised = appliedURLArray.includes(this.props.job.url)
 
-    let ApplyButton = this.props.token? <RaisedButton label= "Apply Later" disabled = {applyraised} onClick={(ev)=>{this.applyLater(ev, this.props.job)}}/> : <div></div>;
+    let RemoveFromAppliedButton = this.props.token && this.props.source==="AppliedTab" ? <RaisedButton label= "Remove" onClick={(ev)=>{this.dapplied(ev, this.props.job)}}/> : <div></div>;
+
+    let ApplyButton = this.props.token && this.props.source==="HomeTab" ? <RaisedButton label= "Apply Later" disabled = {applyraised} onClick={(ev)=>{this.applyLater(ev, this.props.job)}}/> : <div></div>;
     let DApplyButton = this.props.token && applyraised == true ? <RaisedButton label= "Remove From Apply Later" onClick={(ev)=>{this.dapplyLater(ev, this.props.job)}}/> : <div></div>;
-    let Applied = (this.props.token && this.props.source==="ApplyLaterTab" )? <RaisedButton label= "Mark as Applied" onClick={(ev)=>{this.AddToApplied(ev, this.props.job)}}/> : <div></div>;
+    let Applied = (this.props.token && this.props.source==="ApplyLaterTab" )? <RaisedButton className="ml-1" label= "Mark as Applied" onClick={(ev)=>{this.AddToApplied(ev, this.props.job)}}/> : <div></div>;
         let companyName = null
         if(this.props.job.company instanceof Object) {
           companyName = this.props.job.company.name
@@ -86,8 +101,10 @@ class Job extends React.Component {
               <div className="description-height"></div>
               <div>
               {this.props.token && applyraised == true ? DApplyButton : ApplyButton}
-            </div>
               {Applied}
+              {RemoveFromAppliedButton}
+            </div>
+
           </div>
             </CardActions>
             {/*{this.props.job.description.replace(/<\/?[^>]+(>|$)/g,"")}*/}

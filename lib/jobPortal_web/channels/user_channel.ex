@@ -35,6 +35,11 @@ defmodule JobPortalWeb.UserChannel do
     Accounts.find_apply_and_update(payload["job"], payload["user_id"], payload["status"])
     {:reply, {:ok, %{"data" => "Suscribed"}}, socket}
   end
+  def handle_in("REMOVE_APPLIED", payload, socket) do
+    Accounts.find_apply_and_delete(payload["job"], payload["user_id"])
+
+    {:reply, {:ok, %{"data" => "Unsuscribed"}}, socket}
+  end
   def handle_in("REMOVE_APPLY_LATER", payload, socket) do
     Accounts.find_apply_and_delete(payload["job"], payload["user_id"])
 
@@ -51,9 +56,7 @@ defmodule JobPortalWeb.UserChannel do
     |> Enum.filter(&(&1["id"] == String.to_integer(payload["user_id"]) && &1["status"]== "Applied"))
     |> Enum.map(&(&1["job"]))
     skills = JobPortal.Accounts.get_skills(String.to_integer(payload["user_id"]))
-    IO.inspect "============================================"
-    IO.inspect skills
-    IO.inspect "============================================"
+
     {:reply, {:ok, %{"applyLaterJobs" => applyLaterJobs, "appliedJobs" => appliedJobs, "skills" => skills}}, socket}
   end
 

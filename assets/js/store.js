@@ -150,6 +150,7 @@ function ApplyLaterJobs(state=[], action){
     return [..._.reject(state, function(job){ return job.id == action.data.id })];
     case 'MOVE_TO_APPLIED':
     return [..._.reject(state, function(job){ return job.id == action.data.id })];
+
     default:
     return state
   }
@@ -160,6 +161,8 @@ function AppliedJobs(state=[], action){
     return [...action.data.applied];
     case 'MOVE_TO_APPLIED':
     return [action.data, ...state];
+    case 'REMOVE_APPLIED':
+    return [..._.reject(state, function(job){ return job.id == action.data.id })];
 
     default:
     return state
@@ -236,7 +239,7 @@ function userSkills(state=[], action) {
 function root_reducer(state0, action) {
   let reducer = combineReducers({jobs, searchPageMount, searchParams, users, userSkills , resume, login, token, userForm, scorer, loading, jobDetailScore, isMobile, ApplyLaterJobs, AppliedJobs});
   let state1 = reducer(state0, action);
-  console.log("ReduxState", state1);
+  // console.log("ReduxState", state1);
   return deepFreeze(state1);
 };
 let store = createStore(root_reducer);

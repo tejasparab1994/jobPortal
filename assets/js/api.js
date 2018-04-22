@@ -12,7 +12,6 @@ request_users() {
           });
       },
       error: (error) => {
-        console.log(error)
 
       }
     });
@@ -58,25 +57,35 @@ $.ajax("/api/v1/githubToken", {
     });
   }
 
-  submit_login(data, history) {
+  submit_login(data, history, channel) {
     $.ajax("/api/v1/token", {
       method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify(data),
       success: (resp) => {
-        console.log(resp)
         store.dispatch({
           type: 'SET_TOKEN',
           token: resp,
         });
+        channel.push("AFTER_LOG_IN", {user_id: resp.user_id})
+          .receive("ok", response => {
+            store.dispatch({
+              type: 'AFTER_LOG_IN',
+              data: {
+                applylater: _.map(response.applyLaterJobs,function(num){ return JSON.parse(num) }),
+                applied: _.map(response.appliedJobs,function(num){ return JSON.parse(num) }),
+                skills: response.skills
+              }
+
+            });
+        })
         history.history.push("/")
         store.dispatch({
             type: 'CLEAR_LOGIN_FORM'
           });
       },
       error: (err) => {
-        console.log(err)
         alert("invalid user name or password. please register below if you have not registered")
       }
     });
