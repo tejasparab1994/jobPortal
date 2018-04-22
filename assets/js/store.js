@@ -266,7 +266,7 @@ function userSkills(state=[], action) {
 function root_reducer(state0, action) {
   let reducer = combineReducers({jobs, searchPageMount, searchParams, users, userSkills , resume, login, token, userForm, scorer, loading, jobDetailScore, isMobile, ApplyLaterJobs, AppliedJobs});
   let state1 = reducer(state0, action);
-  console.log("ReduxState", state1);
+  // console.log("ReduxState", state1);
   return deepFreeze(state1);
 };
 let store = createStore(root_reducer);
