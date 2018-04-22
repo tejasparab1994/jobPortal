@@ -30,6 +30,8 @@ function scorer(state=empty_scorer, action) {
     return Object.assign({}, state, action.data);
     case "RESET_SCORER":
     return empty_scorer;
+    case 'LOGOUT' :
+    return empty_scorer;
     default:
     return state;
 
@@ -42,6 +44,8 @@ function jobs(state = [], action) {
     return [...action.data];
     case 'UPDATE_JOB_LIST':
     return [...state, ...action.data];
+    case 'LOGOUT' :
+    return [];
     default:
     return state;
   }
@@ -52,6 +56,8 @@ function isMobile(state = false, action) {
     case 'SET_MOBILE':
     return true;
     case 'SET_DESKTOP':
+    return false;
+    case 'LOGOUT' :
     return false;
     default:
     return state;
@@ -92,6 +98,8 @@ function login(state = empty_login, action) {
     return Object.assign({}, state, action.data);
     case 'CLEAR_LOGIN_FORM':
     return empty_login;
+    case 'LOGOUT' :
+    return empty_login;
     default:
     return state;
   }
@@ -106,6 +114,8 @@ function userForm(state = empty_user_form, action ) {
     return empty_user_form;
     case 'SET_TOKEN':
     return Object.assign({}, state, action.token);
+    case 'LOGOUT' :
+    return empty_user_form;
     default:
     return state;
   }
@@ -120,6 +130,8 @@ function users(state = [], action) {
     return [...action.users];
     case 'ADD_USER':
     return [action.user, ...state];
+    case 'LOGOUT' :
+    return [];
     default:
     return state;
   }
@@ -135,6 +147,8 @@ function resume(state=empty_resume, action) {
     return Object.assign({}, state, action.data);
     case 'CLEAR_RESUME':
     return Object.assign({}, state, empty_resume);
+    case 'LOGOUT' :
+    return empty_resume;
     default:
     return state;
   }
@@ -150,7 +164,8 @@ function ApplyLaterJobs(state=[], action){
     return [..._.reject(state, function(job){ return job.id == action.data.id })];
     case 'MOVE_TO_APPLIED':
     return [..._.reject(state, function(job){ return job.id == action.data.id })];
-
+    case 'LOGOUT' :
+    return [];
     default:
     return state
   }
@@ -163,6 +178,8 @@ function AppliedJobs(state=[], action){
     return [action.data, ...state];
     case 'REMOVE_APPLIED':
     return [..._.reject(state, function(job){ return job.id == action.data.id })];
+    case 'LOGOUT' :
+    return [];
 
     default:
     return state
@@ -178,6 +195,8 @@ function loading(state=false, action) {
     return false;
     default:
     return state;
+    case 'LOGOUT' :
+    return false;
   }
 }
 
@@ -193,6 +212,8 @@ function searchPageMount(state=false, action) {
     case 'MOUNT':
     return true;
     case 'UNMOUNT':
+    return false;
+    case 'LOGOUT' :
     return false;
     default:
     return state
@@ -213,6 +234,8 @@ function searchParams(state = empty_searchParams, action) {
     return empty_searchParams;
     case 'ALL_JOBS_DISPLAYED':
     return Object.assign({}, state, {alldisp: true});
+    case 'LOGOUT' :
+    return empty_searchParams;
     default:
     return state;
   }
@@ -222,6 +245,8 @@ function jobDetailScore(state=0, action) {
   switch(action.type) {
     case 'JOB_DETAIL_SCORE':
       return action.score;
+      case 'LOGOUT' :
+      return 0;
     default:
     return state
 }
@@ -232,6 +257,8 @@ function userSkills(state=[], action) {
         return [...action.data.skills];
       case 'AFTER_UPDATE_RESUME':
         return [...action.data];
+        case 'LOGOUT' :
+        return [];
       default:
       return state
     }
@@ -239,7 +266,7 @@ function userSkills(state=[], action) {
 function root_reducer(state0, action) {
   let reducer = combineReducers({jobs, searchPageMount, searchParams, users, userSkills , resume, login, token, userForm, scorer, loading, jobDetailScore, isMobile, ApplyLaterJobs, AppliedJobs});
   let state1 = reducer(state0, action);
-  // console.log("ReduxState", state1);
+  console.log("ReduxState", state1);
   return deepFreeze(state1);
 };
 let store = createStore(root_reducer);
