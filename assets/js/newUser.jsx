@@ -56,7 +56,7 @@ const GitHubIcon = (props) => (
             <CardActions>
               <RaisedButton label="Log In" primary={true} fullWidth={true} onClick = {create_token} />
               <CardTitle className = "subtitle_connect" subtitle="Connect Using Other Account:"/>
-              <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=bdd82a1189d62daed1e5">
+              <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=ded000d9e5e08b914955">
                 <RaisedButton
                   label="Sign In With GitHub"
                   icon= {<GitHubIcon />}
